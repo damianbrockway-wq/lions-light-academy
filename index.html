@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lions Light Academy — Co-Op Hub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+  :root {
+    --navy: #0A1929;
+    --navy-mid: #132F4C;
+    --navy-light: #1A3A5C;
+    --navy-soft: #1E4976;
+    --accent: #4FC3F7;
+    --accent-dim: #2A8EC6;
+    --accent-glow: rgba(79, 195, 247, 0.15);
+    --silver: #B0BEC5;
+    --silver-light: #CFD8DC;
+    --text-white: #ECEFF1;
+    --text-dim: #90A4AE;
+    --text-muted: #607D8B;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(79, 195, 247, 0.3);
+    --green: #66BB6A;
+    --green-bg: rgba(102, 187, 106, 0.1);
+    --blue: #42A5F5;
+    --blue-bg: rgba(66, 165, 245, 0.1);
+    --purple: #AB47BC;
+    --purple-bg: rgba(171, 71, 188, 0.1);
+    --amber: #FFA726;
+    --amber-bg: rgba(255, 167, 38, 0.1);
+    --coral: #EF5350;
+    --coral-bg: rgba(239, 83, 80, 0.1);
+    --radius: 12px;
+    --radius-lg: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--navy);
+    color: var(--text-white);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Animations ── */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes pulse-glow { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes slideInLeft { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes countUp { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+  @keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:0.8} }
+  @keyframes logo-breathe { 0%,100%{box-shadow:0 0 40px rgba(255,255,255,0.3),0 0 80px rgba(240,240,250,0.25),0 0 140px rgba(220,225,240,0.2),0 0 220px rgba(200,210,235,0.15),0 0 320px rgba(180,195,225,0.08)} 50%{box-shadow:0 0 50px rgba(255,255,255,0.4),0 0 100px rgba(240,240,250,0.3),0 0 160px rgba(220,225,240,0.25),0 0 250px rgba(200,210,235,0.18),0 0 350px rgba(180,195,225,0.1)} }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── Hero Header ── */
+  .hero {
+    position: relative;
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    background: linear-gradient(180deg, #060E18 0%, var(--navy) 30%, var(--navy-mid) 100%);
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Particle canvas */
+  #particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(79,195,247,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease;
+  }
+
+  .logo-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: logo-breathe 4s ease-in-out infinite, float 6s ease-in-out infinite;
+    box-shadow:
+      0 0 40px rgba(255, 255, 255, 0.3),
+      0 0 80px rgba(240, 240, 250, 0.25),
+      0 0 140px rgba(220, 225, 240, 0.2),
+      0 0 220px rgba(200, 210, 235, 0.15),
+      0 0 320px rgba(180, 195, 225, 0.08);
+  }
+
+  .logo-container::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px; right: -80px; bottom: -80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(235, 240, 250, 0.14) 25%, rgba(210, 220, 240, 0.09) 45%, rgba(180, 195, 225, 0.04) 65%, transparent 80%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(3.5) contrast(1.1);
+  }
+
+  /* Dynamic greeting */
+  .hero-greeting {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, #ffffff 0%, #CFD8DC 50%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  .hero .tagline {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 0 auto 1.5rem;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .hero-verse-tagline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.92rem;
+    color: rgba(207, 216, 220, 0.7);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.5s forwards;
+  }
+
+  .hero-verse-tagline span {
+    color: var(--accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-style: normal;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Countdown in hero */
+  .hero-countdown {
+    margin-top: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards;
+  }
+
+  .countdown-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .countdown-timer {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .countdown-unit {
+    text-align: center;
+  }
+
+  .countdown-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    animation: countUp 0.5s ease;
+  }
+
+  .countdown-lbl {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .countdown-sep {
+    color: var(--text-muted);
+    font-weight: 300;
+    font-size: 1rem;
+    margin-top: -2px;
+  }
+
+  /* ── Nav Pills ── */
+  .nav-bar {
+    background: rgba(19, 47, 76, 0.85);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .nav-pill:hover {
+    background: var(--surface-hover);
+    color: var(--accent);
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+  }
+
+  .nav-pill svg { width: 16px; height: 16px; opacity: 0.7; }
+  .nav-pill:hover svg { opacity: 1; }
+
+  /* ── Main Container ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* ── Section Headers ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-white);
+    white-space: nowrap;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── Hub Cards (Glassmorphism) ── */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hub-card {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hub-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hub-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .hub-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: var(--border-hover);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(79,195,247,0.05);
+  }
+
+  .hub-card:hover::before { opacity: 1; }
+  .hub-card:hover::after { opacity: 1; }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .hub-card:hover .card-icon { transform: scale(1.1) rotate(-3deg); }
+
+  .card-icon svg { width: 24px; height: 24px; }
+
+  .card-top h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-white);
+  }
+
+  .card-top .card-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: block;
+    margin-top: 0.15rem;
+    width: fit-content;
+  }
+
+  .hub-card p {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    flex-grow: 1;
+  }
+
+  .card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.15rem;
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: gap 0.2s ease;
+  }
+
+  .hub-card:hover .card-action { gap: 0.65rem; }
+
+  /* Card themes */
+  .card-green .card-icon { background: var(--green-bg); }
+  .card-green .card-icon svg { color: var(--green); }
+  .card-green .card-badge { background: var(--green-bg); color: var(--green); }
+  .card-green .card-action { color: var(--green); }
+  .card-green::before { background: linear-gradient(90deg, var(--green), transparent); }
+
+  .card-blue .card-icon { background: var(--blue-bg); }
+  .card-blue .card-icon svg { color: var(--blue); }
+  .card-blue .card-badge { background: var(--blue-bg); color: var(--blue); }
+  .card-blue .card-action { color: var(--blue); }
+  .card-blue::before { background: linear-gradient(90deg, var(--blue), transparent); }
+
+  .card-purple .card-icon { background: var(--purple-bg); }
+  .card-purple .card-icon svg { color: var(--purple); }
+  .card-purple .card-badge { background: var(--purple-bg); color: var(--purple); }
+  .card-purple .card-action { color: var(--purple); }
+  .card-purple::before { background: linear-gradient(90deg, var(--purple), transparent); }
+
+  .card-amber .card-icon { background: var(--amber-bg); }
+  .card-amber .card-icon svg { color: var(--amber); }
+  .card-amber .card-badge { background: var(--amber-bg); color: var(--amber); }
+  .card-amber .card-action { color: var(--amber); }
+  .card-amber::before { background: linear-gradient(90deg, var(--amber), transparent); }
+
+  .card-coral .card-icon { background: var(--coral-bg); }
+  .card-coral .card-icon svg { color: var(--coral); }
+  .card-coral .card-badge { background: var(--coral-bg); color: var(--coral); }
+  .card-coral .card-action { color: var(--coral); }
+  .card-coral::before { background: linear-gradient(90deg, var(--coral), transparent); }
+
+  /* ── Student Spotlight ── */
+  .spotlight-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--amber), var(--coral), var(--purple), var(--blue));
+    background-size: 200% 100%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  .spotlight-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .spotlight-carousel::-webkit-scrollbar { display: none; }
+
+  .spotlight-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .spotlight-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .spotlight-emoji {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .spotlight-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 0.15rem;
+  }
+
+  .spotlight-grade {
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .spotlight-achievement {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .spotlight-badge {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: 50px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-star { background: var(--amber-bg); color: var(--amber); }
+  .badge-book { background: var(--green-bg); color: var(--green); }
+  .badge-art { background: var(--purple-bg); color: var(--purple); }
+  .badge-science { background: var(--blue-bg); color: var(--blue); }
+
+  .spotlight-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .spotlight-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .spotlight-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
+  /* ── Announcements ── */
+  .announcements-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .announcement-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .announcement-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .announcement-item:first-child { padding-top: 0; }
+
+  .announcement-date {
+    background: rgba(79, 195, 247, 0.1);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    min-width: 55px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .announcement-text {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .announcement-text strong {
+    color: var(--text-white);
+    font-weight: 600;
+  }
+
+  /* ── Prayer & Encouragement Board ── */
+  .prayer-board {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prayer-board::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFA726, #FF7043, #AB47BC, #42A5F5);
+    opacity: 0.6;
+  }
+
+  .prayer-verse {
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 167, 38, 0.04);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 167, 38, 0.1);
+  }
+
+  .prayer-verse .verse-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--silver-light);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .prayer-verse .verse-ref {
+    font-size: 0.78rem;
+    color: var(--amber);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .prayer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .prayer-column h4 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .prayer-column h4 .col-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .col-prayers h4 { color: var(--amber); }
+  .col-prayers .col-dot { background: var(--amber); }
+  .col-encouragements h4 { color: var(--green); }
+  .col-encouragements .col-dot { background: var(--green); }
+
+  .prayer-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.6rem;
+    transition: border-color 0.2s;
+  }
+
+  .prayer-item:hover { border-color: rgba(255,255,255,0.12); }
+
+  .prayer-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+  }
+
+  .prayer-item-author { font-size: 0.8rem; font-weight: 600; color: var(--text-white); }
+  .prayer-item-date { font-size: 0.68rem; color: var(--text-muted); }
+  .prayer-item-text { font-size: 0.85rem; color: var(--text-dim); line-height: 1.55; }
+
+  .prayer-add-form {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .prayer-add-form h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .prayer-form-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prayer-form-row input, .prayer-form-row textarea {
+    flex: 1;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  .prayer-form-row input::placeholder, .prayer-form-row textarea::placeholder { color: var(--text-muted); }
+  .prayer-form-row input:focus, .prayer-form-row textarea:focus { border-color: var(--accent); }
+
+  .prayer-form-row select {
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    min-width: 160px;
+  }
+
+  .prayer-form-row select option { background: var(--navy-mid); color: var(--text-white); }
+
+  .prayer-submit-btn {
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent-dim);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .prayer-submit-btn:hover { background: var(--accent); transform: translateY(-1px); }
+
+  /* ── Parent Portal ── */
+  .portal-section { margin-bottom: 2.5rem; }
+
+  .portal-gate {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .portal-gate .gate-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(79, 195, 247, 0.08);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .portal-gate .gate-icon svg { width: 28px; height: 28px; color: var(--accent); }
+
+  .portal-gate h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--text-white);
+    margin-bottom: 0.4rem;
+  }
+
+  .portal-gate .gate-desc { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+  .portal-form { display: flex; gap: 0.5rem; max-width: 360px; margin: 0 auto; }
+
+  .portal-form input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .portal-form input::placeholder { color: var(--text-muted); }
+  .portal-form input:focus { border-color: var(--accent); }
+
+  .portal-form button {
+    padding: 0.7rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent-dim);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .portal-form button:hover { background: var(--accent); }
+
+  .portal-error { color: var(--coral); font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+
+  .portal-dashboard { display: none; }
+  .portal-dashboard.active { display: block; animation: fadeInUp 0.5s ease; }
+
+  .portal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .portal-header .portal-welcome { font-size: 0.9rem; color: var(--text-dim); }
+  .portal-header .portal-welcome strong { color: var(--accent); }
+
+  .portal-logout {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .portal-logout:hover { border-color: var(--coral); color: var(--coral); }
+
+  .advisory-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .advisory-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    transition: all 0.25s;
+  }
+
+  .advisory-card:hover { border-color: rgba(255,255,255,0.12); transform: translateX(4px); }
+
+  .advisory-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem; }
+
+  .advisory-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.78rem; color: #fff; flex-shrink: 0;
+  }
+
+  .advisory-avatar.av-blue { background: var(--blue); }
+  .advisory-avatar.av-green { background: var(--green); }
+  .advisory-avatar.av-purple { background: var(--purple); }
+  .advisory-avatar.av-amber { background: var(--amber); }
+
+  .advisory-info { flex: 1; }
+  .advisory-teacher { font-size: 0.88rem; font-weight: 600; color: var(--text-white); }
+  .advisory-subject { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .advisory-date { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+  .advisory-body { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; padding-left: 2.85rem; }
+
+  .advisory-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 0.2rem 0.55rem; border-radius: 4px;
+    margin-left: 2.85rem; margin-top: 0.6rem;
+  }
+
+  .tag-info { background: var(--blue-bg); color: var(--blue); }
+  .tag-action { background: var(--amber-bg); color: var(--amber); }
+  .tag-praise { background: var(--green-bg); color: var(--green); }
+
+  /* ── Onboarding ── */
+  .onboarding-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .onboarding-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--green), var(--accent));
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+    opacity: 0.6;
+  }
+
+  .onboarding-intro { text-align: center; margin-bottom: 1.75rem; }
+
+  .onboarding-intro .welcome-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(79, 195, 247, 0.08);
+    border: 1px solid rgba(79, 195, 247, 0.15);
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--accent); letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+
+  .onboarding-intro h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem; color: var(--text-white);
+    margin-bottom: 0.4rem;
+  }
+
+  .onboarding-intro p { font-size: 0.88rem; color: var(--text-dim); max-width: 500px; margin: 0 auto; }
+
+  .onboard-progress { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; padding: 0 0.5rem; }
+
+  .onboard-progress-bar { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+
+  .onboard-progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--accent-dim), var(--green));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  .onboard-progress-text { font-size: 0.75rem; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 40px; text-align: right; }
+
+  .onboard-steps { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .onboard-step {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.15rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .onboard-step:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); }
+
+  .onboard-step.completed {
+    border-color: rgba(102, 187, 106, 0.2);
+    background: rgba(102, 187, 106, 0.03);
+  }
+
+  .step-check {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.1rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: transparent;
+  }
+
+  .step-check svg { width: 14px; height: 14px; color: transparent; transition: color 0.25s ease; }
+
+  .onboard-step.completed .step-check { border-color: var(--green); background: var(--green); transform: scale(1.15); }
+  .onboard-step.completed .step-check svg { color: #fff; }
+
+  .step-content { flex: 1; }
+  .step-number { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 0.15rem; }
+  .onboard-step.completed .step-number { color: var(--green); }
+  .step-title { font-size: 0.95rem; font-weight: 700; color: var(--text-white); margin-bottom: 0.2rem; }
+  .onboard-step.completed .step-title { text-decoration: line-through; text-decoration-color: rgba(102, 187, 106, 0.4); color: var(--text-dim); }
+  .step-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.55; }
+
+  .step-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    margin-top: 0.5rem; font-size: 0.78rem; font-weight: 600;
+    color: var(--accent); text-decoration: none; transition: gap 0.2s;
+  }
+
+  .step-link:hover { gap: 0.55rem; }
+
+  .onboard-step.completed .step-desc, .onboard-step.completed .step-link { opacity: 0.5; }
+
+  .onboard-congrats {
+    display: none; text-align: center; padding: 1.5rem;
+    margin-top: 1rem;
+    background: rgba(102, 187, 106, 0.06);
+    border: 1px solid rgba(102, 187, 106, 0.15);
+    border-radius: var(--radius);
+    font-size: 0.95rem; color: var(--green); font-weight: 600;
+  }
+
+  /* ── Resources Grid ── */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .resource-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-decoration: none; color: inherit;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .resource-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .resource-icon { font-size: 1.75rem; margin-bottom: 0.5rem; display: block; transition: transform 0.3s; }
+  .resource-card:hover .resource-icon { transform: scale(1.2); }
+  .resource-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-white); margin-bottom: 0.25rem; }
+  .resource-card p { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── Floating Contact Button ── */
+  .fab-contact {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(79,195,247,0.4);
+    z-index: 200;
+    transition: all 0.3s ease;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .fab-contact:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(79,195,247,0.5);
+  }
+
+  .fab-contact svg { width: 24px; height: 24px; }
+
+  .fab-tooltip {
+    position: fixed;
+    bottom: 2rem;
+    right: 4.5rem;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    color: var(--text-white);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .fab-contact:hover + .fab-tooltip { opacity: 1; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    color: var(--silver);
+    font-weight: 600;
+  }
+
+  .footer-motto { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-top: 0.3rem; }
+
+  .footer-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  .footer-copy {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .hero { padding: 2rem 1.25rem 1.75rem; min-height: 350px; }
+    .hero h1 { font-size: 2rem; }
+    .hub-grid { grid-template-columns: 1fr; }
+    .resources-grid { grid-template-columns: 1fr 1fr; }
+    .container { padding: 1.5rem 1rem; }
+    .logo-container { width: 100px; height: 100px; }
+    .nav-pill { padding: 0.45rem 0.85rem; font-size: 0.78rem; }
+    .prayer-columns { grid-template-columns: 1fr; }
+    .spotlight-card { flex: 0 0 250px; }
+    .hero-countdown { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="logo-container">
+      <img src="lla-logo.png" alt="Lions Light Academy Logo"
+           onerror="this.style.display='none'; this.parentElement.querySelector('.logo-fallback').style.display='flex';">
+      <div class="logo-fallback" style="display:none; flex-direction:column; align-items:center; justify-content:center; color:#4FC3F7;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L12 6M12 6C9 6 6 8 6 12C6 16 9 18 12 18C15 18 18 16 18 12C18 8 15 6 12 6Z"/>
+          <path d="M8 18V22H16V18"/><path d="M10 22H14"/>
+        </svg>
+      </div>
+    </div>
+    <p class="hero-greeting" id="heroGreeting"></p>
+    <h1>Lions Light Academy</h1>
+    <p class="tagline">Co-Op Learning Hub</p>
+    <div class="hero-divider"></div>
+    <p class="hero-verse-tagline"><em>&ldquo;It is the glory of God to conceal a matter; to search out a matter is the glory of kings.&rdquo;</em> <span>&mdash; Proverbs 25:2</span></p>
+    <div style="height: 1rem;"></div>
+    <p class="hero-description">
+      Your central hub for homework, communication, and scheduling.
+      Everything Lions Light families need, all in one place.
+    </p>
+    <!-- Next Meetup Countdown -->
+    <div class="hero-countdown" id="countdownContainer">
+      <span class="countdown-label">Next Meetup</span>
+      <div class="countdown-timer" id="countdownTimer">
+        <div class="countdown-unit"><span class="countdown-num" id="cdDays">--</span><span class="countdown-lbl">Days</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit"><span class="countdown-num" id="cdHours">--</span><span class="countdown-lbl">Hrs</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit"><span class="countdown-num" id="cdMins">--</span><span class="countdown-lbl">Min</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit"><span class="countdown-num" id="cdSecs">--</span><span class="countdown-lbl">Sec</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Sticky Nav ── -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="https://classroom.google.com" target="_blank" class="nav-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Classroom
+    </a>
+    <a href="https://chat.google.com" target="_blank" class="nav-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Chat
+    </a>
+    <a href="https://slack.com/signin" target="_blank" class="nav-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="2" width="3" height="8" rx="1.5"/><rect x="8" y="14" width="3" height="8" rx="1.5"/><rect x="2" y="8" width="8" height="3" rx="1.5"/><rect x="14" y="13" width="8" height="3" rx="1.5"/></svg>
+      Slack
+    </a>
+    <a href="https://calendar.google.com" target="_blank" class="nav-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Calendar
+    </a>
+    <a href="#spotlight" class="nav-pill" onclick="event.preventDefault(); document.getElementById('spotlight').scrollIntoView({behavior:'smooth'});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Spotlight
+    </a>
+    <a href="#prayer-board" class="nav-pill" onclick="event.preventDefault(); document.getElementById('prayer-board').scrollIntoView({behavior:'smooth'});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Prayer
+    </a>
+    <a href="#parent-portal" class="nav-pill" onclick="event.preventDefault(); document.getElementById('parent-portal').scrollIntoView({behavior:'smooth'});" style="border-color: rgba(79,195,247,0.2);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Portal
+    </a>
+  </div>
+</nav>
+
+<!-- ── Main Content ── -->
+<main class="container">
+
+  <!-- Learning Tools -->
+  <div class="section-header reveal">
+    <h2>Learning Tools</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="hub-grid">
+    <a href="https://classroom.google.com" target="_blank" class="hub-card card-green reveal reveal-delay-1">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div><h3>Homework Hub</h3><span class="card-badge">Google Classroom</span></div>
+      </div>
+      <p>Access assignments, turn in work, and check grades. Everything for your classes lives here.</p>
+      <span class="card-action">Open Classroom &#8594;</span>
+    </a>
+    <a href="https://chat.google.com" target="_blank" class="hub-card card-blue reveal reveal-delay-2">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><h3>Google Chat</h3><span class="card-badge">Messaging</span></div>
+      </div>
+      <p>Quick messages and group conversations with your co-op families. Great for day-to-day check-ins.</p>
+      <span class="card-action">Open Chat &#8594;</span>
+    </a>
+    <a href="https://slack.com/signin" target="_blank" class="hub-card card-purple reveal reveal-delay-1">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="2" width="3" height="8" rx="1.5"/><rect x="8" y="14" width="3" height="8" rx="1.5"/><rect x="2" y="8" width="8" height="3" rx="1.5"/><rect x="14" y="13" width="8" height="3" rx="1.5"/></svg></div>
+        <div><h3>Slack Workspace</h3><span class="card-badge">Channels</span></div>
+      </div>
+      <p>Organized channels for announcements, homework help, project planning, and parent discussions.</p>
+      <span class="card-action">Open Slack &#8594;</span>
+    </a>
+    <a href="https://calendar.google.com" target="_blank" class="hub-card card-amber reveal reveal-delay-2">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div><h3>Meetup Calendar</h3><span class="card-badge">Scheduling</span></div>
+      </div>
+      <p>Upcoming co-op meetups, study sessions, project days, and field trips all in one shared calendar.</p>
+      <span class="card-action">Open Calendar &#8594;</span>
+    </a>
+  </div>
+
+  <!-- Student Spotlight -->
+  <div id="spotlight"></div>
+  <div class="section-header reveal">
+    <h2>Student Spotlight</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="spotlight-container reveal">
+    <div class="spotlight-carousel" id="spotlightCarousel">
+      <div class="spotlight-card">
+        <span class="spotlight-emoji">&#127775;</span>
+        <div class="spotlight-name">Sophia Martinez</div>
+        <div class="spotlight-grade">5th Grade</div>
+        <p class="spotlight-achievement">Completed all math challenges this month with a perfect score. Incredible dedication!</p>
+        <span class="spotlight-badge badge-star">Math Champion</span>
+      </div>
+      <div class="spotlight-card">
+        <span class="spotlight-emoji">&#128218;</span>
+        <div class="spotlight-name">Elijah Brockway</div>
+        <div class="spotlight-grade">3rd Grade</div>
+        <p class="spotlight-achievement">Read 12 books in March alone and gave amazing book reports to the class. A true bookworm!</p>
+        <span class="spotlight-badge badge-book">Reading Star</span>
+      </div>
+      <div class="spotlight-card">
+        <span class="spotlight-emoji">&#127912;</span>
+        <div class="spotlight-name">Ava Williams</div>
+        <div class="spotlight-grade">7th Grade</div>
+        <p class="spotlight-achievement">Her watercolor landscape was selected for the community art show. So talented!</p>
+        <span class="spotlight-badge badge-art">Artist of the Month</span>
+      </div>
+      <div class="spotlight-card">
+        <span class="spotlight-emoji">&#128300;</span>
+        <div class="spotlight-name">Noah Rivera</div>
+        <div class="spotlight-grade">6th Grade</div>
+        <p class="spotlight-achievement">Built a working model solar system and presented it to the entire co-op. Mind-blowing effort!</p>
+        <span class="spotlight-badge badge-science">Science Whiz</span>
+      </div>
+      <div class="spotlight-card">
+        <span class="spotlight-emoji">&#127941;</span>
+        <div class="spotlight-name">Lily Thompson</div>
+        <div class="spotlight-grade">4th Grade</div>
+        <p class="spotlight-achievement">Always the first to help other students and mentored two new families joining our co-op.</p>
+        <span class="spotlight-badge badge-star">Leadership Award</span>
+      </div>
+    </div>
+    <div class="spotlight-nav" id="spotlightNav"></div>
+  </div>
+
+  <!-- New Here? Onboarding -->
+  <div id="onboarding"></div>
+  <div class="section-header reveal">
+    <h2>New Here? Get Started</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="onboarding-card reveal">
+    <div class="onboarding-intro">
+      <div class="welcome-badge">&#128075; Welcome to the Pride!</div>
+      <h3>Your Quick-Start Checklist</h3>
+      <p>Follow these steps to get your family set up and connected. Click each step to mark it complete as you go.</p>
+    </div>
+    <div class="onboard-progress">
+      <div class="onboard-progress-bar"><div class="onboard-progress-fill" id="progressFill"></div></div>
+      <span class="onboard-progress-text" id="progressText">0 / 6</span>
+    </div>
+    <div class="onboard-steps" id="onboardSteps">
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 1</div><div class="step-title">Join Google Classroom</div><p class="step-desc">Sign in with your Google account and enter the class code from your welcome email.</p><a href="https://classroom.google.com" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Google Classroom &#8594;</a></div>
+      </div>
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 2</div><div class="step-title">Set Up Google Chat</div><p class="step-desc">Join our co-op chat space for quick family-to-family communication.</p><a href="https://chat.google.com" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Google Chat &#8594;</a></div>
+      </div>
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 3</div><div class="step-title">Join Our Slack Workspace</div><p class="step-desc">Click the invite link from your welcome email and introduce your family in #introductions.</p><a href="https://slack.com/signin" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Slack &#8594;</a></div>
+      </div>
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 4</div><div class="step-title">Subscribe to the Shared Calendar</div><p class="step-desc">Add our co-op calendar so you never miss a meetup or field trip.</p><a href="https://calendar.google.com" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Calendar &#8594;</a></div>
+      </div>
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 5</div><div class="step-title">Get the Parent Portal Password</div><p class="step-desc">Ask a co-op admin for access to teacher advisories and private notes.</p><a href="#parent-portal" class="step-link" onclick="event.stopPropagation(); document.getElementById('parent-portal').scrollIntoView({behavior:'smooth'});">Go to Parent Portal &#8594;</a></div>
+      </div>
+      <div class="onboard-step" onclick="toggleStep(this)">
+        <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="step-content"><div class="step-number">Step 6</div><div class="step-title">Bookmark This Page!</div><p class="step-desc">Save this hub to your bookmarks or add it to your phone's home screen.</p></div>
+      </div>
+    </div>
+    <div class="onboard-congrats" id="onboardCongrats">&#127881; You're all set! Welcome to the Lions Light Academy family.</div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="section-header reveal">
+    <h2>Announcements</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="announcements-card reveal">
+    <div class="announcement-item">
+      <span class="announcement-date">APR 7</span>
+      <div class="announcement-text"><strong>Welcome to our new hub!</strong> &mdash; This is your one-stop page for all Lions Light Academy links and updates. Bookmark this page!</div>
+    </div>
+    <div class="announcement-item">
+      <span class="announcement-date">APR 7</span>
+      <div class="announcement-text"><strong>Getting started</strong> &mdash; Make sure all family members have joined Google Classroom and Slack. Check your email for invite links.</div>
+    </div>
+    <div class="announcement-item">
+      <span class="announcement-date">TBD</span>
+      <div class="announcement-text"><strong>First group meetup</strong> &mdash; Date and location coming soon. Stay tuned in Slack for details!</div>
+    </div>
+  </div>
+
+  <!-- Prayer & Encouragement Board -->
+  <div id="prayer-board"></div>
+  <div class="section-header reveal">
+    <h2>Prayer &amp; Encouragement</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="prayer-board reveal">
+    <div class="prayer-verse">
+      <p class="verse-text">&ldquo;It is the glory of God to conceal a matter; to search out a matter is the glory of kings.&rdquo;</p>
+      <span class="verse-ref">Proverbs 25:2 (NIV)</span>
+    </div>
+    <div class="prayer-columns">
+      <div class="prayer-column col-prayers">
+        <h4><span class="col-dot"></span> Prayer Requests</h4>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">The Martinez Family</span><span class="prayer-item-date">Apr 6</span></div><p class="prayer-item-text">Please pray for Sophia as she prepares for her first science presentation. She's been working so hard!</p></div>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">The Williams Family</span><span class="prayer-item-date">Apr 4</span></div><p class="prayer-item-text">Praying for safe travels for all families heading to the state park field trip next week.</p></div>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">Mrs. Thompson</span><span class="prayer-item-date">Apr 2</span></div><p class="prayer-item-text">Please keep our co-op in prayer as we plan the summer curriculum. Wisdom and guidance needed!</p></div>
+      </div>
+      <div class="prayer-column col-encouragements">
+        <h4><span class="col-dot"></span> Encouragements &amp; Praise</h4>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">The Rivera Family</span><span class="prayer-item-date">Apr 7</span></div><p class="prayer-item-text">Huge shout-out to all the parents who helped set up for last week's co-op day. You are all amazing!</p></div>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">Mr. Johnson</span><span class="prayer-item-date">Apr 5</span></div><p class="prayer-item-text">So proud of our students for completing the reading challenge this month. Every single one of them finished!</p></div>
+        <div class="prayer-item"><div class="prayer-item-header"><span class="prayer-item-author">The Brockway Family</span><span class="prayer-item-date">Apr 3</span></div><p class="prayer-item-text">Thankful for this community and the friendships our kids are building. God is so good!</p></div>
+      </div>
+    </div>
+    <div class="prayer-add-form">
+      <h4>Share a Prayer Request or Encouragement</h4>
+      <div class="prayer-form-row">
+        <input type="text" id="prayerName" placeholder="Your family name">
+        <select id="prayerType"><option value="prayer">Prayer Request</option><option value="encouragement">Encouragement</option></select>
+      </div>
+      <div class="prayer-form-row"><textarea id="prayerMessage" rows="2" placeholder="Write your message..."></textarea></div>
+      <div class="prayer-form-row" style="justify-content: flex-end;"><button class="prayer-submit-btn" onclick="addPrayerEntry()">Post</button></div>
+    </div>
+  </div>
+
+  <!-- Parent Portal -->
+  <div id="parent-portal"></div>
+  <div class="section-header reveal">
+    <h2>Parent Portal</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="portal-section reveal">
+    <div class="portal-gate" id="portalGate">
+      <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Parent Connect</h3>
+      <p class="gate-desc">Enter the co-op password to view teacher advisories and notes.</p>
+      <div class="portal-form" id="portalForm">
+        <input type="password" id="portalPassword" placeholder="Enter parent password" autocomplete="off">
+        <button onclick="attemptLogin()">Sign In</button>
+      </div>
+      <p class="portal-error" id="portalError">Incorrect password. Please try again.</p>
+    </div>
+    <div class="portal-dashboard" id="portalDashboard">
+      <div class="portal-header">
+        <p class="portal-welcome">Signed in as <strong>Parent</strong></p>
+        <button class="portal-logout" onclick="portalLogout()">Sign Out</button>
+      </div>
+      <div class="advisory-list">
+        <div class="advisory-card"><div class="advisory-meta"><div class="advisory-avatar av-blue">MS</div><div class="advisory-info"><div class="advisory-teacher">Mrs. Smith</div><div class="advisory-subject">Mathematics</div></div><span class="advisory-date">Apr 7, 2026</span></div><p class="advisory-body">Great progress this week on fractions. Students are encouraged to practice the worksheet problems at home before our next meetup session.</p><span class="advisory-tag tag-info">General Update</span></div>
+        <div class="advisory-card"><div class="advisory-meta"><div class="advisory-avatar av-green">MJ</div><div class="advisory-info"><div class="advisory-teacher">Mr. Johnson</div><div class="advisory-subject">Science</div></div><span class="advisory-date">Apr 5, 2026</span></div><p class="advisory-body">Reminder: Please bring materials for the volcano project to our next session. Supply list is posted in Google Classroom.</p><span class="advisory-tag tag-action">Action Needed</span></div>
+        <div class="advisory-card"><div class="advisory-meta"><div class="advisory-avatar av-purple">DW</div><div class="advisory-info"><div class="advisory-teacher">Ms. Davis-Williams</div><div class="advisory-subject">Language Arts</div></div><span class="advisory-date">Apr 3, 2026</span></div><p class="advisory-body">The students did an outstanding job on their book report presentations. Please take a moment to celebrate their hard work at home!</p><span class="advisory-tag tag-praise">Praise</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resources -->
+  <div class="section-header reveal">
+    <h2>Resources</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="resources-grid reveal">
+    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128214;</span><h4>Curriculum Guides</h4><p>Lesson plans &amp; study materials</p></a>
+    <a href="https://www.khanacademy.org" target="_blank" class="resource-card"><span class="resource-icon">&#127891;</span><h4>Khan Academy</h4><p>Free courses &amp; practice</p></a>
+    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128203;</span><h4>Supply Lists</h4><p>What you need for each class</p></a>
+    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128194;</span><h4>Shared Documents</h4><p>Co-op forms &amp; policies</p></a>
+  </div>
+
+</main>
+
+<!-- Floating Contact Button -->
+<button class="fab-contact" onclick="window.location.href='mailto:admin@lionslightacademy.com?subject=Co-Op Question'">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+</button>
+<div class="fab-tooltip">Contact Co-Op Admin</div>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <p class="footer-brand">Lions Light Academy</p>
+  <p class="footer-motto">Learning together, growing together</p>
+  <div class="footer-links">
+    <a href="https://classroom.google.com" target="_blank">Classroom</a>
+    <a href="https://chat.google.com" target="_blank">Google Chat</a>
+    <a href="https://slack.com/signin" target="_blank">Slack</a>
+    <a href="https://calendar.google.com" target="_blank">Calendar</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Lions Light Academy Co-Op. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── Particle Background ──
+  (function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const count = 60;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.3,
+          dy: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.5 + 0.1,
+          twinkleSpeed: Math.random() * 0.02 + 0.005,
+          twinkleOffset: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const time = Date.now() * 0.001;
+
+      particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        const twinkle = Math.sin(time * p.twinkleSpeed * 10 + p.twinkleOffset) * 0.3 + 0.7;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200, 220, 255, ${p.opacity * twinkle})`;
+        ctx.fill();
+      });
+
+      // Draw connection lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(79, 195, 247, ${0.06 * (1 - dist / 100)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    draw();
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+  })();
+
+  // ── Dynamic Greeting ──
+  (function() {
+    const hour = new Date().getHours();
+    let greeting;
+    if (hour < 12) greeting = 'Good morning, Lions Light families';
+    else if (hour < 17) greeting = 'Good afternoon, Lions Light families';
+    else greeting = 'Good evening, Lions Light families';
+    document.getElementById('heroGreeting').textContent = greeting;
+  })();
+
+  // ── Countdown Timer ──
+  (function() {
+    // Set your next meetup date here
+    const meetupDate = new Date();
+    meetupDate.setDate(meetupDate.getDate() + 5);
+    meetupDate.setHours(10, 0, 0, 0);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = meetupDate - now;
+      if (diff <= 0) {
+        document.getElementById('countdownContainer').innerHTML = '<span class="countdown-label" style="color:var(--green);">Meetup day is here!</span>';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cdDays').textContent = String(d).padStart(2, '0');
+      document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cdMins').textContent = String(m).padStart(2, '0');
+      document.getElementById('cdSecs').textContent = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+
+  // ── Scroll Reveal ──
+  (function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  })();
+
+  // ── Card Mouse Glow Effect ──
+  document.querySelectorAll('.hub-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', x + '%');
+      card.style.setProperty('--mouse-y', y + '%');
+    });
+  });
+
+  // ── Spotlight Carousel Nav ──
+  (function() {
+    const carousel = document.getElementById('spotlightCarousel');
+    const cards = carousel.querySelectorAll('.spotlight-card');
+    const nav = document.getElementById('spotlightNav');
+    const visibleCount = Math.floor(carousel.offsetWidth / 290) || 1;
+    const dotCount = Math.max(1, cards.length - visibleCount + 1);
+
+    for (let i = 0; i < dotCount; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'spotlight-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => {
+        cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      };
+      nav.appendChild(dot);
+    }
+
+    carousel.addEventListener('scroll', () => {
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = 290;
+      const activeIndex = Math.round(scrollLeft / cardWidth);
+      nav.querySelectorAll('.spotlight-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === activeIndex);
+      });
+    });
+  })();
+
+  // ── Parent Portal Logic ──
+  const PARENT_PASSWORD = 'lionslight2026';
+
+  function attemptLogin() {
+    const input = document.getElementById('portalPassword');
+    const error = document.getElementById('portalError');
+    if (input.value === PARENT_PASSWORD) {
+      document.getElementById('portalGate').style.display = 'none';
+      document.getElementById('portalDashboard').classList.add('active');
+      error.style.display = 'none';
+      input.value = '';
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  function portalLogout() {
+    document.getElementById('portalDashboard').classList.remove('active');
+    document.getElementById('portalGate').style.display = '';
+  }
+
+  document.getElementById('portalPassword').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') attemptLogin();
+  });
+
+  // ── Onboarding Checklist ──
+  function toggleStep(el) {
+    el.classList.toggle('completed');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const steps = document.querySelectorAll('.onboard-step');
+    const completed = document.querySelectorAll('.onboard-step.completed');
+    const total = steps.length;
+    const done = completed.length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' / ' + total;
+    document.getElementById('onboardCongrats').style.display = done === total ? 'block' : 'none';
+  }
+
+  // ── Prayer Board ──
+  function addPrayerEntry() {
+    const name = document.getElementById('prayerName').value.trim();
+    const type = document.getElementById('prayerType').value;
+    const message = document.getElementById('prayerMessage').value.trim();
+    if (!name || !message) { alert('Please enter your family name and a message.'); return; }
+    const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const entryHTML = `<div class="prayer-item" style="animation: fadeIn 0.4s ease;"><div class="prayer-item-header"><span class="prayer-item-author">${name}</span><span class="prayer-item-date">${dateStr}</span></div><p class="prayer-item-text">${message}</p></div>`;
+    const column = type === 'prayer' ? document.querySelector('.col-prayers') : document.querySelector('.col-encouragements');
+    column.querySelector('h4').insertAdjacentHTML('afterend', entryHTML);
+    document.getElementById('prayerName').value = '';
+    document.getElementById('prayerMessage').value = '';
+  }
+</script>
+
+</body>
+</html>
