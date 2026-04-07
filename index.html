@@ -487,6 +487,89 @@
   .card-coral .card-action { color: var(--coral); }
   .card-coral::before { background: linear-gradient(90deg, var(--coral), transparent); }
 
+  /* ── Our Classes ── */
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  .class-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .class-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .class-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .class-card-hs::before { background: linear-gradient(90deg, var(--purple), var(--accent)); }
+  .class-card-ms::before { background: linear-gradient(90deg, var(--blue), var(--green)); }
+  .class-card-elem::before { background: linear-gradient(90deg, var(--amber), var(--coral)); }
+  .class-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .class-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.35rem;
+    color: var(--text-white);
+  }
+  .class-card .class-grades {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .class-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+  .class-roster-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid var(--border);
+    color: var(--text-white);
+    background: var(--surface);
+  }
+  .class-roster-btn:hover {
+    background: var(--accent);
+    color: var(--navy);
+    border-color: var(--accent);
+  }
+  .class-roster-btn svg {
+    width: 14px; height: 14px;
+  }
+  @media (max-width: 768px) {
+    .classes-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── Student Spotlight ── */
   .spotlight-container {
     background: var(--surface);
@@ -1048,14 +1131,34 @@
     font-size: 0.95rem; color: var(--green); font-weight: 600;
   }
 
-  /* ── Resources Grid ── */
+  /* ── Resource Library ── */
+  .library-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .library-tab {
+    padding: 0.45rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .library-tab:hover { border-color: var(--border-hover); color: var(--text-white); }
+  .library-tab.active { background: var(--accent); color: var(--navy); border-color: var(--accent); }
+  .library-panel { display: none; }
+  .library-panel.active { display: block; }
   .resources-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.75rem;
     margin-bottom: 2.5rem;
   }
-
   .resource-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -1065,18 +1168,96 @@
     transition: all 0.3s ease;
     text-align: center;
   }
-
   .resource-card:hover {
     background: var(--surface-hover);
     border-color: var(--border-hover);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
-
   .resource-icon { font-size: 1.75rem; margin-bottom: 0.5rem; display: block; transition: transform 0.3s; }
   .resource-card:hover .resource-icon { transform: scale(1.2); }
   .resource-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-white); margin-bottom: 0.25rem; }
   .resource-card p { font-size: 0.78rem; color: var(--text-muted); }
+  .resource-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag-free { background: var(--green-bg); color: var(--green); }
+  .tag-maine { background: var(--purple-bg); color: var(--purple); }
+  .tag-video { background: var(--blue-bg); color: var(--blue); }
+  .tag-pdf { background: var(--amber-bg); color: var(--amber); }
+
+  /* ── Co-Op Gallery ── */
+  .gallery-container {
+    margin-bottom: 2.5rem;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    grid-auto-rows: 180px;
+  }
+  .gallery-item {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .gallery-item:hover {
+    border-color: var(--border-hover);
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+  }
+  .gallery-placeholder-icon { font-size: 2rem; opacity: 0.5; }
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0.75rem;
+    background: linear-gradient(transparent, rgba(10, 25, 41, 0.9));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay span { font-size: 0.75rem; color: var(--text-white); font-weight: 500; }
+  .gallery-note {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .gallery-note svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 0.3rem; stroke: var(--accent); }
+  @media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
+    .gallery-item.wide { grid-column: span 1; }
+  }
 
   /* ── Floating Contact Button ── */
   .fab-contact {
@@ -1628,6 +1809,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Calendar
     </a>
+    <a href="#classes" class="nav-pill" onclick="event.preventDefault(); document.getElementById('classes').scrollIntoView({behavior:'smooth'});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Classes
+    </a>
     <a href="#snowday" class="nav-pill" onclick="event.preventDefault(); document.getElementById('snowday').scrollIntoView({behavior:'smooth'});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="8" y1="20" x2="8.01" y2="20"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="22" x2="12.01" y2="22"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="16" y1="20" x2="16.01" y2="20"/></svg>
       Snow Day
@@ -1639,6 +1824,14 @@
     <a href="#prayer-board" class="nav-pill" onclick="event.preventDefault(); document.getElementById('prayer-board').scrollIntoView({behavior:'smooth'});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       Prayer
+    </a>
+    <a href="#resources" class="nav-pill" onclick="event.preventDefault(); document.getElementById('resources').scrollIntoView({behavior:'smooth'});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Library
+    </a>
+    <a href="#gallery" class="nav-pill" onclick="event.preventDefault(); document.getElementById('gallery').scrollIntoView({behavior:'smooth'});">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Gallery
     </a>
     <a href="#parent-portal" class="nav-pill" onclick="event.preventDefault(); document.getElementById('parent-portal').scrollIntoView({behavior:'smooth'});" style="border-color: rgba(79,195,247,0.2);">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1689,6 +1882,46 @@
       <p>Upcoming co-op meetups, study sessions, project days, and field trips all in one shared calendar.</p>
       <span class="card-action">Open Calendar &#8594;</span>
     </a>
+  </div>
+
+  <!-- Our Classes -->
+  <div id="classes"></div>
+  <div class="section-header reveal">
+    <h2>Our Classes</h2>
+    <div class="section-line"></div>
+    <p class="section-sub">Three learning levels, one united co-op. Tap "View Roster" to see your classmates in Google Classroom.</p>
+  </div>
+  <div class="classes-grid reveal">
+    <div class="class-card class-card-hs">
+      <span class="class-icon">&#127891;</span>
+      <h4>High School</h4>
+      <div class="class-grades">Grades 9 – 12</div>
+      <p>Advanced coursework, college prep, leadership projects, and mentoring younger students.</p>
+      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        View Roster
+      </a>
+    </div>
+    <div class="class-card class-card-ms">
+      <span class="class-icon">&#128218;</span>
+      <h4>Middle School</h4>
+      <div class="class-grades">Grades 6 – 8</div>
+      <p>Core subjects, group projects, hands-on science labs, and building study skills together.</p>
+      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        View Roster
+      </a>
+    </div>
+    <div class="class-card class-card-elem">
+      <span class="class-icon">&#9997;&#65039;</span>
+      <h4>Elementary</h4>
+      <div class="class-grades">Grades K – 5</div>
+      <p>Foundational learning through stories, art, play-based math, and nature exploration.</p>
+      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        View Roster
+      </a>
+    </div>
   </div>
 
   <!-- Student Spotlight -->
@@ -2037,17 +2270,195 @@
     </div>
   </div>
 
-  <!-- Resources -->
+  <!-- Resource Library -->
+  <div id="resources"></div>
   <div class="section-header reveal">
-    <h2>Resources</h2>
+    <h2>Resource Library</h2>
     <div class="section-line"></div>
+    <p class="section-sub">Curated tools, curriculum, and Maine homeschool essentials — all free or low-cost.</p>
   </div>
 
-  <div class="resources-grid reveal">
-    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128214;</span><h4>Curriculum Guides</h4><p>Lesson plans &amp; study materials</p></a>
-    <a href="https://www.khanacademy.org" target="_blank" class="resource-card"><span class="resource-icon">&#127891;</span><h4>Khan Academy</h4><p>Free courses &amp; practice</p></a>
-    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128203;</span><h4>Supply Lists</h4><p>What you need for each class</p></a>
-    <a href="#" class="resource-card" onclick="event.preventDefault()"><span class="resource-icon">&#128194;</span><h4>Shared Documents</h4><p>Co-op forms &amp; policies</p></a>
+  <div class="reveal">
+    <div class="library-tabs">
+      <button class="library-tab active" data-lib="all">All</button>
+      <button class="library-tab" data-lib="curriculum">Curriculum</button>
+      <button class="library-tab" data-lib="video">Video &amp; Media</button>
+      <button class="library-tab" data-lib="maine">Maine Legal</button>
+      <button class="library-tab" data-lib="coop">Co-Op Docs</button>
+    </div>
+
+    <div class="resources-grid" id="libraryGrid">
+      <!-- Curriculum -->
+      <a href="https://www.khanacademy.org" target="_blank" class="resource-card" data-category="curriculum video">
+        <span class="resource-icon">&#127891;</span>
+        <h4>Khan Academy</h4>
+        <p>Math, science, history &amp; more — all grade levels</p>
+        <span class="resource-tag tag-free">Free</span>
+      </a>
+      <a href="https://www.ixl.com" target="_blank" class="resource-card" data-category="curriculum">
+        <span class="resource-icon">&#129518;</span>
+        <h4>IXL Learning</h4>
+        <p>Personalized math &amp; ELA practice with diagnostics</p>
+        <span class="resource-tag tag-free">Free Tier</span>
+      </a>
+      <a href="https://www.easypeasy.org" target="_blank" class="resource-card" data-category="curriculum">
+        <span class="resource-icon">&#9889;</span>
+        <h4>Easy Peasy All-in-One</h4>
+        <p>Complete free Christian homeschool curriculum K-12</p>
+        <span class="resource-tag tag-free">Free</span>
+      </a>
+      <a href="https://www.amblesideonline.org" target="_blank" class="resource-card" data-category="curriculum">
+        <span class="resource-icon">&#128218;</span>
+        <h4>Ambleside Online</h4>
+        <p>Charlotte Mason curriculum with free book lists</p>
+        <span class="resource-tag tag-free">Free</span>
+      </a>
+
+      <!-- Video & Media -->
+      <a href="https://www.youtube.com/@CrashCourse" target="_blank" class="resource-card" data-category="video">
+        <span class="resource-icon">&#127909;</span>
+        <h4>Crash Course</h4>
+        <p>Fun, fast-paced video lessons on every subject</p>
+        <span class="resource-tag tag-video">Video</span>
+      </a>
+      <a href="https://www.youtube.com/@numberphile" target="_blank" class="resource-card" data-category="video curriculum">
+        <span class="resource-icon">&#128290;</span>
+        <h4>Numberphile</h4>
+        <p>Mind-blowing math videos that make numbers fun</p>
+        <span class="resource-tag tag-video">Video</span>
+      </a>
+      <a href="https://www.youtube.com/@SciShow" target="_blank" class="resource-card" data-category="video">
+        <span class="resource-icon">&#128300;</span>
+        <h4>SciShow</h4>
+        <p>Explore the unexpected science behind everyday life</p>
+        <span class="resource-tag tag-video">Video</span>
+      </a>
+      <a href="https://www.duolingo.com" target="_blank" class="resource-card" data-category="curriculum">
+        <span class="resource-icon">&#127757;</span>
+        <h4>Duolingo</h4>
+        <p>Free language learning — Spanish, French &amp; more</p>
+        <span class="resource-tag tag-free">Free</span>
+      </a>
+
+      <!-- Maine Legal -->
+      <a href="https://www.hslda.org/legal/maine" target="_blank" class="resource-card" data-category="maine">
+        <span class="resource-icon">&#9878;&#65039;</span>
+        <h4>HSLDA — Maine Laws</h4>
+        <p>Legal overview of Maine homeschool requirements</p>
+        <span class="resource-tag tag-maine">Maine</span>
+      </a>
+      <a href="https://www.maine.gov/doe/schools/schoolops/homeinstruction" target="_blank" class="resource-card" data-category="maine">
+        <span class="resource-icon">&#127970;</span>
+        <h4>Maine DOE Home Instruction</h4>
+        <p>Official state forms, filing deadlines &amp; guidelines</p>
+        <span class="resource-tag tag-maine">Maine</span>
+      </a>
+      <a href="https://www.homeeducatorsfellowship.org" target="_blank" class="resource-card" data-category="maine">
+        <span class="resource-icon">&#129309;</span>
+        <h4>Home Educators Fellowship</h4>
+        <p>Maine's Christian homeschool support network</p>
+        <span class="resource-tag tag-maine">Maine</span>
+      </a>
+
+      <!-- Co-Op Docs -->
+      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
+        <span class="resource-icon">&#128203;</span>
+        <h4>Supply Lists</h4>
+        <p>What you need for each class level</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
+        <span class="resource-icon">&#128194;</span>
+        <h4>Co-Op Handbook</h4>
+        <p>Policies, schedules &amp; expectations</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
+        <span class="resource-icon">&#128214;</span>
+        <h4>Curriculum Guides</h4>
+        <p>Lesson plans by grade level</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
+        <span class="resource-icon">&#128221;</span>
+        <h4>Field Trip Waivers</h4>
+        <p>Printable permission forms</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Co-Op Gallery -->
+  <div id="gallery"></div>
+  <div class="section-header reveal">
+    <h2>Co-Op Gallery</h2>
+    <div class="section-line"></div>
+    <p class="section-sub">Snapshots of our learning adventures — field trips, projects, and everyday moments.</p>
+  </div>
+
+  <div class="gallery-container reveal">
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#127912;</span>
+          Art Projects
+        </div>
+        <div class="gallery-overlay"><span>Art Projects</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#127966;&#65039;</span>
+          Acadia Trip
+        </div>
+        <div class="gallery-overlay"><span>Acadia Field Trip</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#128300;</span>
+          Science Fair
+        </div>
+        <div class="gallery-overlay"><span>Science Fair 2026</span></div>
+      </div>
+      <div class="gallery-item wide">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#128247;</span>
+          Group Photo Day
+        </div>
+        <div class="gallery-overlay"><span>Group Photo Day</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#127793;</span>
+          Garden Project
+        </div>
+        <div class="gallery-overlay"><span>Spring Garden Project</span></div>
+      </div>
+      <div class="gallery-item tall">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#128218;</span>
+          Reading Circle
+        </div>
+        <div class="gallery-overlay"><span>Reading Circle</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#127925;</span>
+          Music Recital
+        </div>
+        <div class="gallery-overlay"><span>Spring Music Recital</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-placeholder-icon">&#129504;</span>
+          Math Olympics
+        </div>
+        <div class="gallery-overlay"><span>Math Olympics</span></div>
+      </div>
+    </div>
+    <div class="gallery-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Ready for photos! Replace these placeholders with your co-op's real pictures. Once photos are added, we'll enable password protection.
+    </div>
   </div>
 
 </main>
@@ -2155,17 +2566,49 @@
   })();
 
   // ── Countdown Timer ──
+  // Automatically counts down to the next Tuesday at 9:00 AM Eastern, every week
   (function() {
-    // Set your next meetup date here
-    const meetupDate = new Date();
-    meetupDate.setDate(meetupDate.getDate() + 5);
-    meetupDate.setHours(10, 0, 0, 0);
+    function getNextTuesday9AMEastern() {
+      // Get current time expressed in Eastern timezone
+      const now = new Date();
+      const eastern = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).formatToParts(now);
+      const p = {};
+      eastern.forEach(({ type, value }) => { p[type] = value; });
+      const etYear = +p.year, etMonth = +p.month - 1, etDay = +p.day;
+      const etHour = +p.hour, etMinute = +p.minute;
+      // Figure out day of week in Eastern time
+      const etNow = new Date(etYear, etMonth, etDay);
+      const dayOfWeek = etNow.getDay(); // 0=Sun, 2=Tue
+      let daysUntil = (2 - dayOfWeek + 7) % 7;
+      // If it's already Tuesday, check if 9:00 AM has passed
+      if (daysUntil === 0 && (etHour > 9 || (etHour === 9 && etMinute >= 0))) {
+        daysUntil = 7;
+      }
+      // Build the target Tuesday at 09:00 in local/system time
+      const target = new Date(now.getTime() + daysUntil * 86400000);
+      // Adjust to 9:00 AM Eastern: find the offset between now-Eastern and now-local
+      const localRef = new Date(etYear, etMonth, etDay, etHour, etMinute);
+      const offsetMs = now.getTime() - localRef.getTime();
+      // Set target to 9:00 AM Eastern (converted to system time)
+      target.setHours(0, 0, 0, 0);
+      return new Date(target.getTime() + (9 * 3600000) + offsetMs);
+    }
+
+    let meetupDate = getNextTuesday9AMEastern();
 
     function updateCountdown() {
       const now = new Date();
-      const diff = meetupDate - now;
+      let diff = meetupDate - now;
       if (diff <= 0) {
-        document.getElementById('countdownContainer').innerHTML = '<span class="countdown-label" style="color:var(--green);">Meetup day is here!</span>';
+        meetupDate = getNextTuesday9AMEastern();
+        diff = meetupDate - now;
+      }
+      if (diff <= 0) {
+        document.getElementById('countdownContainer').innerHTML = '<span class="countdown-label" style="color:var(--green);">Meetup day is here! &#127881;</span>';
         return;
       }
       const d = Math.floor(diff / 86400000);
@@ -2351,6 +2794,23 @@
     document.getElementById('snowTime').value = '';
     document.getElementById('snowDesc').value = '';
   }
+
+  // ── Resource Library Tab Filtering ──
+  document.querySelectorAll('.library-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.library-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.lib;
+      document.querySelectorAll('#libraryGrid .resource-card').forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          const cats = card.dataset.category || '';
+          card.style.display = cats.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
 </script>
 
 </body>
