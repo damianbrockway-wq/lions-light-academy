@@ -503,6 +503,7 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
   }
   .class-card::before {
     content: '';
@@ -514,6 +515,10 @@
   .class-card:hover {
     border-color: var(--border-hover);
     transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .class-card.expanded {
+    border-color: var(--border-hover);
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   }
   .class-card-hs::before { background: linear-gradient(90deg, var(--purple), var(--accent)); }
@@ -542,30 +547,53 @@
     font-size: 0.85rem;
     color: var(--text-dim);
     line-height: 1.5;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
   }
-  .class-roster-btn {
-    display: inline-flex;
+  .class-expand-hint {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: color 0.25s;
+  }
+  .class-card:hover .class-expand-hint { color: var(--accent); }
+  .class-card.expanded .class-expand-hint { display: none; }
+  .class-subjects {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin 0.4s ease;
+    margin-top: 0;
+  }
+  .class-card.expanded .class-subjects {
+    max-height: 500px;
+    margin-top: 1rem;
+  }
+  .subject-link {
+    display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1.25rem;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.4rem;
     border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.25s ease;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
+    text-decoration: none;
     color: var(--text-white);
-    background: var(--surface);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
   }
-  .class-roster-btn:hover {
+  .subject-link:hover {
     background: var(--accent);
     color: var(--navy);
     border-color: var(--accent);
   }
-  .class-roster-btn svg {
-    width: 14px; height: 14px;
+  .subject-link .subj-emoji { font-size: 1.1rem; flex-shrink: 0; }
+  .subject-link .subj-arrow {
+    margin-left: auto;
+    opacity: 0.4;
+    font-size: 0.75rem;
+    transition: opacity 0.25s;
   }
+  .subject-link:hover .subj-arrow { opacity: 1; }
   @media (max-width: 768px) {
     .classes-grid { grid-template-columns: 1fr; }
   }
@@ -1797,7 +1825,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Classroom
     </a>
-    <a href="https://chat.google.com" target="_blank" class="nav-pill">
+    <a href="https://chat.google.com/room/ycbwyqxd" target="_blank" class="nav-pill">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Chat
     </a>
@@ -1858,7 +1886,7 @@
       <p>Access assignments, turn in work, and check grades. Everything for your classes lives here.</p>
       <span class="card-action">Open Classroom &#8594;</span>
     </a>
-    <a href="https://chat.google.com" target="_blank" class="hub-card card-blue reveal reveal-delay-2">
+    <a href="https://chat.google.com/room/ycbwyqxd" target="_blank" class="hub-card card-blue reveal reveal-delay-2">
       <div class="card-top">
         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <div><h3>Google Chat</h3><span class="card-badge">Messaging</span></div>
@@ -1889,38 +1917,71 @@
   <div class="section-header reveal">
     <h2>Our Classes</h2>
     <div class="section-line"></div>
-    <p class="section-sub">Three learning levels, one united co-op. Tap "View Roster" to see your classmates in Google Classroom.</p>
+    <p class="section-sub">Three learning levels, one united co-op. Tap a card to see classes, then jump straight into Google Classroom.</p>
   </div>
   <div class="classes-grid reveal">
-    <div class="class-card class-card-hs">
-      <span class="class-icon">&#127891;</span>
-      <h4>High School</h4>
-      <div class="class-grades">Grades 9 – 12</div>
-      <p>Advanced coursework, college prep, leadership projects, and mentoring younger students.</p>
-      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-        View Roster
-      </a>
-    </div>
-    <div class="class-card class-card-ms">
-      <span class="class-icon">&#128218;</span>
-      <h4>Middle School</h4>
-      <div class="class-grades">Grades 6 – 8</div>
-      <p>Core subjects, group projects, hands-on science labs, and building study skills together.</p>
-      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-        View Roster
-      </a>
-    </div>
-    <div class="class-card class-card-elem">
+    <div class="class-card class-card-elem" onclick="this.classList.toggle('expanded')">
       <span class="class-icon">&#9997;&#65039;</span>
       <h4>Elementary</h4>
       <div class="class-grades">Grades K – 5</div>
-      <p>Foundational learning through stories, art, play-based math, and nature exploration.</p>
-      <a href="#" class="class-roster-btn" title="Update this link to your Google Classroom">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-        View Roster
-      </a>
+      <p>Foundational learning through stories, art, hands-on science, and exploration.</p>
+      <div class="class-expand-hint">&#9660; Tap to view classes</div>
+      <div class="class-subjects">
+        <a href="https://classroom.google.com/c/56rit5i5" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#127912;</span> Art
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/4kujlnvk" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#127760;</span> History
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/72b4bm5a" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#128300;</span> Science
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+    <div class="class-card class-card-ms" onclick="this.classList.toggle('expanded')">
+      <span class="class-icon">&#128218;</span>
+      <h4>Middle School</h4>
+      <div class="class-grades">Grades 5 – 8</div>
+      <p>Core subjects, group projects, hands-on science labs, and building study skills.</p>
+      <div class="class-expand-hint">&#9660; Tap to view classes</div>
+      <div class="class-subjects">
+        <a href="https://classroom.google.com/c/hajf4en5" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#127912;</span> Art
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/syz6qhlt" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#128300;</span> Science
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/ycbwyqxd" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#127760;</span> History
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+    <div class="class-card class-card-hs" onclick="this.classList.toggle('expanded')">
+      <span class="class-icon">&#127891;</span>
+      <h4>High School</h4>
+      <div class="class-grades">Grades 9 – 12</div>
+      <p>Advanced coursework, college prep, leadership, and forging your own path.</p>
+      <div class="class-expand-hint">&#9660; Tap to view classes</div>
+      <div class="class-subjects">
+        <a href="https://classroom.google.com/c/ceaiyinl" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#128640;</span> Elective
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/rh2qu24t" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#128300;</span> Science
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+        <a href="https://classroom.google.com/c/zee2vqnh" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+          <span class="subj-emoji">&#127760;</span> History
+          <span class="subj-arrow">&#8594;</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -2159,7 +2220,7 @@
       </div>
       <div class="onboard-step" onclick="toggleStep(this)">
         <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <div class="step-content"><div class="step-number">Step 2</div><div class="step-title">Set Up Google Chat</div><p class="step-desc">Join our co-op chat space for quick family-to-family communication.</p><a href="https://chat.google.com" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Google Chat &#8594;</a></div>
+        <div class="step-content"><div class="step-number">Step 2</div><div class="step-title">Set Up Google Chat</div><p class="step-desc">Join our co-op chat space for quick family-to-family communication.</p><a href="https://chat.google.com/room/ycbwyqxd" target="_blank" class="step-link" onclick="event.stopPropagation();">Go to Google Chat &#8594;</a></div>
       </div>
       <div class="onboard-step" onclick="toggleStep(this)">
         <div class="step-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -2464,7 +2525,7 @@
 </main>
 
 <!-- Floating Contact Button -->
-<button class="fab-contact" onclick="window.location.href='mailto:admin@lionslightacademy.com?subject=Co-Op Question'">
+<button class="fab-contact" onclick="window.location.href='mailto:lionslightacademy2025@gmail.com?subject=Co-Op Question'">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
 </button>
 <div class="fab-tooltip">Contact Co-Op Admin</div>
@@ -2475,7 +2536,7 @@
   <p class="footer-motto">Learning together, growing together</p>
   <div class="footer-links">
     <a href="https://classroom.google.com" target="_blank">Classroom</a>
-    <a href="https://chat.google.com" target="_blank">Google Chat</a>
+    <a href="https://chat.google.com/room/ycbwyqxd" target="_blank">Google Chat</a>
     <a href="https://slack.com/signin" target="_blank">Slack</a>
     <a href="https://calendar.google.com" target="_blank">Calendar</a>
   </div>
