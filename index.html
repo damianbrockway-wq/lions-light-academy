@@ -487,6 +487,25 @@
   .card-coral .card-action { color: var(--coral); }
   .card-coral::before { background: linear-gradient(90deg, var(--coral), transparent); }
 
+  /* ── Calendar Embed ── */
+  .calendar-embed {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+  .calendar-embed iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: var(--radius);
+  }
+  @media (max-width: 768px) {
+    .calendar-embed iframe { height: 350px; }
+  }
+
   /* ── Our Classes ── */
   .classes-grid {
     display: grid;
@@ -1833,7 +1852,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="2" width="3" height="8" rx="1.5"/><rect x="8" y="14" width="3" height="8" rx="1.5"/><rect x="2" y="8" width="8" height="3" rx="1.5"/><rect x="14" y="13" width="8" height="3" rx="1.5"/></svg>
       Slack
     </a>
-    <a href="https://calendar.google.com" target="_blank" class="nav-pill">
+    <a href="#calendar" class="nav-pill" onclick="event.preventDefault(); document.getElementById('calendar').scrollIntoView({behavior:'smooth'});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Calendar
     </a>
@@ -1902,14 +1921,25 @@
       <p>Organized channels for announcements, homework help, project planning, and parent discussions.</p>
       <span class="card-action">Open Slack &#8594;</span>
     </a>
-    <a href="https://calendar.google.com" target="_blank" class="hub-card card-amber reveal reveal-delay-2">
+    <a href="#calendar" class="hub-card card-amber reveal reveal-delay-2" onclick="event.preventDefault(); document.getElementById('calendar').scrollIntoView({behavior:'smooth'});">
       <div class="card-top">
         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div><h3>Meetup Calendar</h3><span class="card-badge">Scheduling</span></div>
       </div>
       <p>Upcoming co-op meetups, study sessions, project days, and field trips all in one shared calendar.</p>
-      <span class="card-action">Open Calendar &#8594;</span>
+      <span class="card-action">View Calendar &#8594;</span>
     </a>
+  </div>
+
+  <!-- Meetup Calendar -->
+  <div id="calendar"></div>
+  <div class="section-header reveal">
+    <h2>Meetup Calendar</h2>
+    <div class="section-line"></div>
+    <p class="section-sub">All co-op meetups, study sessions, and events in one place. Updated in real time.</p>
+  </div>
+  <div class="calendar-embed reveal">
+    <iframe src="https://calendar.google.com/calendar/embed?src=844075054c2d0a12955d3d40e3d70987f22937867a90770f47326a14390963aa%40group.calendar.google.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showPrint=0&showTabs=1&showCalendars=0&bgcolor=%230A1929&color=%234FC3F7" loading="lazy"></iframe>
   </div>
 
   <!-- Our Classes -->
@@ -2538,7 +2568,7 @@
     <a href="https://classroom.google.com" target="_blank">Classroom</a>
     <a href="https://chat.google.com/room/ycbwyqxd" target="_blank">Google Chat</a>
     <a href="https://slack.com/signin" target="_blank">Slack</a>
-    <a href="https://calendar.google.com" target="_blank">Calendar</a>
+    <a href="#calendar" onclick="event.preventDefault(); document.getElementById('calendar').scrollIntoView({behavior:'smooth'});">Calendar</a>
   </div>
   <p class="footer-copy">&copy; 2026 Lions Light Academy Co-Op. All rights reserved.</p>
 </footer>
