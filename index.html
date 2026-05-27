@@ -1797,6 +1797,24 @@
 </head>
 <body>
 
+<!-- ── Apply / Enroll button styles ── -->
+<style>
+  .hero-cta { display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-top:1.75rem; }
+  .btn-apply, .btn-apply-ghost {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.8rem 1.6rem; border-radius:50px;
+    font-size:0.9rem; font-weight:700; letter-spacing:0.3px;
+    text-decoration:none; transition:all 0.25s ease; cursor:pointer;
+  }
+  .btn-apply { background:linear-gradient(135deg,#4FC3F7,#2A8EC6); color:#0A1929;
+    box-shadow:0 6px 20px rgba(79,195,247,0.25); }
+  .btn-apply:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(79,195,247,0.4); }
+  .btn-apply-ghost { background:rgba(255,255,255,0.05); color:var(--text-white); border:1px solid var(--border-hover); }
+  .btn-apply-ghost:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
+  .nav-pill-enroll { background:rgba(79,195,247,0.12); color:var(--accent); border-color:rgba(79,195,247,0.35); font-weight:700; }
+  .nav-pill-enroll:hover { background:var(--accent); color:var(--navy); }
+</style>
+
 <!-- ── Hero ── -->
 <header class="hero">
   <canvas id="particles"></canvas>
@@ -1834,12 +1852,21 @@
         <div class="countdown-unit"><span class="countdown-num" id="cdSecs">--</span><span class="countdown-lbl">Sec</span></div>
       </div>
     </div>
+    <!-- Apply / Enroll CTA -->
+    <div class="hero-cta">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener" class="btn-apply">✏️ Apply Online</a>
+      <a href="LLA_Enrollment_Application_Fillable.pdf" target="_blank" rel="noopener" class="btn-apply-ghost">⬇ Download Application (PDF)</a>
+    </div>
   </div>
 </header>
 
 <!-- ── Sticky Nav ── -->
 <nav class="nav-bar">
   <div class="nav-inner">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener" class="nav-pill nav-pill-enroll">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      Enroll
+    </a>
     <a href="https://classroom.google.com" target="_blank" class="nav-pill">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Classroom
