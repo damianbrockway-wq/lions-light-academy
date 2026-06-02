@@ -2794,5 +2794,67 @@
   });
 </script>
 
+<!-- ── Prayer board live feed (Path B: auto-publish from Google Form) ── -->
+<script>
+  (function(){
+    var API_URL = 'https://script.google.com/macros/s/AKfycbwFUbwhmXhg-HyoZkpYVKj5gS7PfuTKuwwkjVNXxRFWJ17Yoc1MomwdJ6QgLuZg9Ydx/exec';
+
+    function escapeHTML(s){
+      return String(s||'').replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+
+    function renderEntries(column, entries){
+      if (!column) return;
+      // Remove existing empty-state placeholder
+      var empty = column.querySelector('.prayer-empty');
+      if (empty) empty.remove();
+      // Remove any previously-rendered live items so we don't duplicate on reloads
+      column.querySelectorAll('.prayer-item.live-entry').forEach(function(n){ n.remove(); });
+
+      if (!entries || entries.length === 0) {
+        var none = document.createElement('div');
+        none.className = 'prayer-empty';
+        none.style.cssText = 'font-size:0.85rem;color:var(--text-muted);font-style:italic;padding:1rem 0.85rem;text-align:center;border:1px dashed rgba(255,255,255,0.10);border-radius:10px;';
+        none.textContent = 'No entries yet — submit one with the form below.';
+        column.appendChild(none);
+        return;
+      }
+
+      entries.forEach(function(e){
+        var card = document.createElement('div');
+        card.className = 'prayer-item live-entry';
+        card.innerHTML =
+          '<div class="prayer-item-header">' +
+            '<span class="prayer-item-author">' + escapeHTML(e.name) + '</span>' +
+            '<span class="prayer-item-date">' + escapeHTML(e.date) + '</span>' +
+          '</div>' +
+          '<p class="prayer-item-text">' + escapeHTML(e.message) + '</p>';
+        column.appendChild(card);
+      });
+    }
+
+    function loadPrayerFeed(){
+      fetch(API_URL, { method: 'GET', mode: 'cors', cache: 'no-store' })
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          renderEntries(document.querySelector('.col-prayers'), (data && data.prayers) || []);
+          renderEntries(document.querySelector('.col-encouragements'), (data && data.encouragements) || []);
+        })
+        .catch(function(err){
+          // On failure (e.g. Apps Script blip), leave the empty state in place.
+          console.warn('LLA prayer feed unavailable:', err);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadPrayerFeed);
+    } else {
+      loadPrayerFeed();
+    }
+  })();
+</script>
+
 </body>
 </html>
