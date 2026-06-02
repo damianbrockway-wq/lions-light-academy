@@ -2403,7 +2403,7 @@
 
     <div class="lla-carousel" id="llaCarousel" aria-roledescription="carousel" aria-label="Lions Light Academy photo gallery">
       <div class="lla-carousel-stage">
-        <div class="lla-counter"><span id="llaCounterCurrent">1</span> / <span id="llaCounterTotal">14</span></div>
+        <div class="lla-counter"><span id="llaCounterCurrent">1</span> / <span id="llaCounterTotal">18</span></div>
         <button class="lla-arrow lla-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
         <button class="lla-arrow lla-next" type="button" aria-label="Next photo">&rsaquo;</button>
         <figure class="lla-slide active"><img src="gallery-01.jpg" alt="Christmas Co-Op Day" loading="eager"><figcaption class="lla-caption">Christmas Co-Op Day</figcaption></figure>
@@ -2420,6 +2420,10 @@
         <figure class="lla-slide"><img src="gallery-13.jpg" alt="Cloud-in-a-jar experiment" loading="lazy"><figcaption class="lla-caption">Cloud-in-a-jar experiment</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-14.jpg" alt="Colonial history day" loading="lazy"><figcaption class="lla-caption">Colonial history day</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-15.jpg" alt="Outdoor art day" loading="lazy"><figcaption class="lla-caption">Outdoor art day</figcaption></figure>
+        <figure class="lla-slide"><img src="gallery-16.jpg" alt="The whole Pride together" loading="lazy"><figcaption class="lla-caption">The whole Pride together</figcaption></figure>
+        <figure class="lla-slide"><img src="gallery-17.jpg" alt="King for a day" loading="lazy"><figcaption class="lla-caption">King for a day</figcaption></figure>
+        <figure class="lla-slide"><img src="gallery-18.jpg" alt="Betsy Ross & the first flag" loading="lazy"><figcaption class="lla-caption">Betsy Ross &amp; the first flag</figcaption></figure>
+        <figure class="lla-slide"><img src="gallery-19.jpg" alt="Egg drop team" loading="lazy"><figcaption class="lla-caption">Egg drop team</figcaption></figure>
       </div>
       <div class="lla-dots" id="llaDots"></div>
     </div>
@@ -2433,10 +2437,25 @@
     (function(){
       var c = document.getElementById('llaCarousel');
       if (!c) return;
+      // Shuffle the slide order in the DOM so each page load shows a different sequence
+      (function shuffleSlides(){
+        var stage = c.querySelector('.lla-carousel-stage');
+        var nodes = Array.prototype.slice.call(stage.querySelectorAll('.lla-slide'));
+        // Fisher-Yates shuffle
+        for (var i = nodes.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = nodes[i]; nodes[i] = nodes[j]; nodes[j] = tmp;
+        }
+        // Re-append in new order; the first one becomes "active"
+        nodes.forEach(function(n, idx){
+          n.classList.toggle('active', idx === 0);
+          stage.appendChild(n);
+        });
+      })();
       var slides = c.querySelectorAll('.lla-slide');
       var dotsBox = document.getElementById('llaDots');
       var counter = document.getElementById('llaCounterCurrent');
-      var current = 0, timer = null, INTERVAL = 6000;
+      var current = 0, timer = null, INTERVAL = 7500;
 
       slides.forEach(function(_, i){
         var d = document.createElement('button');
@@ -2458,14 +2477,17 @@
       }
       function next(){ goTo(current + 1); }
       function prev(){ goTo(current - 1); }
-      function start(){ timer = setInterval(next, INTERVAL); }
+      function start(){ if (!timer) timer = setInterval(next, INTERVAL); }
       function stop(){ if (timer) { clearInterval(timer); timer = null; } }
       function restart(){ stop(); start(); }
 
       c.querySelector('.lla-prev').addEventListener('click', function(){ prev(); restart(); });
       c.querySelector('.lla-next').addEventListener('click', function(){ next(); restart(); });
+      // Pause on mouse hover only (not touch). Touch users get manual control via arrows/dots.
       c.addEventListener('mouseenter', stop);
       c.addEventListener('mouseleave', start);
+      // Pause briefly after any tap/touch so the auto-advance doesn't fight a manual interaction
+      c.addEventListener('touchstart', function(){ stop(); setTimeout(start, 8000); }, {passive:true});
 
       // Lightbox
       var lb = document.createElement('div');
