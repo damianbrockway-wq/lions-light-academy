@@ -2382,7 +2382,7 @@
       .lla-carousel { position:relative; border-radius:var(--radius-lg); overflow:hidden; background:rgba(0,0,0,0.25); border:1px solid var(--border); }
       .lla-carousel-stage { position:relative; width:100%; aspect-ratio:16/10; }
       .lla-slide { position:absolute; inset:0; opacity:0; transition:opacity 0.8s ease; pointer-events:none; margin:0; }
-      .lla-slide.active { opacity:1; pointer-events:auto; }
+      .lla-slide.active { opacity:1 !important; pointer-events:auto; }
       .lla-slide img { width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; }
       .lla-caption { position:absolute; left:0; right:0; bottom:0; padding:1.6rem 1.5rem 1.25rem; background:linear-gradient(transparent, rgba(10,25,41,0.9)); color:var(--text-white); font-size:0.95rem; font-weight:500; pointer-events:none; }
       .lla-arrow { position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.45); color:#fff; font-size:24px; line-height:1; cursor:pointer; transition:all 0.2s; z-index:3; display:flex; align-items:center; justify-content:center; padding:0; backdrop-filter:blur(6px); }
@@ -2403,7 +2403,7 @@
 
     <div class="lla-carousel" id="llaCarousel" aria-roledescription="carousel" aria-label="Lions Light Academy photo gallery">
       <div class="lla-carousel-stage">
-        <div class="lla-counter"><span id="llaCounterCurrent">1</span> / <span id="llaCounterTotal">15</span></div>
+        <div class="lla-counter"><span id="llaCounterCurrent">1</span> / <span id="llaCounterTotal">14</span></div>
         <button class="lla-arrow lla-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
         <button class="lla-arrow lla-next" type="button" aria-label="Next photo">&rsaquo;</button>
         <figure class="lla-slide active"><img src="gallery-01.jpg" alt="Christmas Co-Op Day" loading="eager"><figcaption class="lla-caption">Christmas Co-Op Day</figcaption></figure>
@@ -2414,7 +2414,6 @@
         <figure class="lla-slide"><img src="gallery-06.jpg" alt="First catch on the ice" loading="lazy"><figcaption class="lla-caption">First catch on the ice</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-07.jpg" alt="Big catch — ice fishing" loading="lazy"><figcaption class="lla-caption">Big catch &mdash; ice fishing</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-08.jpg" alt="Sunset on the ice" loading="lazy"><figcaption class="lla-caption">Sunset on the ice</figcaption></figure>
-        <figure class="lla-slide"><img src="gallery-09.jpg" alt="Ice fishing victory" loading="lazy"><figcaption class="lla-caption">Ice fishing victory</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-10.jpg" alt="Golden hour on the lake" loading="lazy"><figcaption class="lla-caption">Golden hour on the lake</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-11.jpg" alt="Inside the sugar shack" loading="lazy"><figcaption class="lla-caption">Inside the sugar shack</figcaption></figure>
         <figure class="lla-slide"><img src="gallery-12.jpg" alt="Tapping the maple trees" loading="lazy"><figcaption class="lla-caption">Tapping the maple trees</figcaption></figure>
