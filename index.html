@@ -1911,7 +1911,7 @@
     </a>
     <a href="#resources" class="nav-pill" onclick="event.preventDefault(); document.getElementById('resources').scrollIntoView({behavior:'smooth'});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      Library
+      Resources
     </a>
     <a href="#snowday" class="nav-pill" onclick="event.preventDefault(); document.getElementById('snowday').scrollIntoView({behavior:'smooth'});">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="8" y1="20" x2="8.01" y2="20"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="22" x2="12.01" y2="22"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="16" y1="20" x2="16.01" y2="20"/></svg>
@@ -2300,21 +2300,23 @@
     <div class="onboard-congrats" id="onboardCongrats">&#127881; You're all set! Welcome to the Lions Light Academy family.</div>
   </div>
 
-  <!-- Resource Library -->
+  <!-- Resources -->
   <div id="resources"></div>
   <div class="section-header reveal">
-    <h2>Resource Library</h2>
+    <h2>Resources</h2>
     <div class="section-line"></div>
-    <p class="section-sub">Curated tools, curriculum, and Maine homeschool essentials — all free or low-cost.</p>
+    <p class="section-sub">Our official LLA documents plus curated curriculum, media, and Maine homeschool essentials.</p>
   </div>
 
   <div class="reveal">
     <div class="library-tabs">
       <button class="library-tab active" data-lib="all">All</button>
+      <button class="library-tab" data-lib="family">Family</button>
+      <button class="library-tab" data-lib="teacher">Teacher</button>
+      <button class="library-tab" data-lib="policy">Policy</button>
       <button class="library-tab" data-lib="curriculum">Curriculum</button>
       <button class="library-tab" data-lib="video">Video &amp; Media</button>
       <button class="library-tab" data-lib="maine">Maine Legal</button>
-      <button class="library-tab" data-lib="coop">Co-Op Docs</button>
     </div>
 
     <div class="resources-grid" id="libraryGrid">
@@ -2390,30 +2392,82 @@
         <span class="resource-tag tag-maine">Maine</span>
       </a>
 
-      <!-- Co-Op Docs -->
-      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
-        <span class="resource-icon">&#128203;</span>
-        <h4>Supply Lists</h4>
-        <p>What you need for each class level</p>
-        <span class="resource-tag tag-pdf">Coming soon</span>
+      <!-- LLA Documents — Family -->
+      <a href="docs/parent-packet.pdf" target="_blank" class="resource-card" data-category="family">
+        <span class="resource-icon">&#128218;</span>
+        <h4>Parent Packet</h4>
+        <p>Welcome letter, vision, handbook &amp; what to expect</p>
+        <span class="resource-tag tag-pdf">PDF</span>
       </a>
-      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
-        <span class="resource-icon">&#128194;</span>
-        <h4>Co-Op Handbook</h4>
-        <p>Policies, schedules &amp; expectations</p>
-        <span class="resource-tag tag-pdf">Coming soon</span>
-      </a>
-      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
-        <span class="resource-icon">&#128214;</span>
-        <h4>Curriculum Guides</h4>
-        <p>Lesson plans by grade level</p>
-        <span class="resource-tag tag-pdf">Coming soon</span>
-      </a>
-      <a href="#" class="resource-card" data-category="coop" onclick="event.preventDefault()">
+      <a href="docs/code-of-conduct.pdf" target="_blank" class="resource-card" data-category="family">
         <span class="resource-icon">&#128221;</span>
-        <h4>Field Trip Waivers</h4>
-        <p>Printable permission forms</p>
-        <span class="resource-tag tag-pdf">Coming soon</span>
+        <h4>Code of Conduct</h4>
+        <p>Faith-based expectations for students &amp; families (v1.1)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/coop-day-schedule.pdf" target="_blank" class="resource-card" data-category="family">
+        <span class="resource-icon">&#128197;</span>
+        <h4>Co-Op Day Schedule</h4>
+        <p>Daily schedule for the 2026–2027 school year</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/maine-homeschool-checklist.pdf" target="_blank" class="resource-card" data-category="family maine">
+        <span class="resource-icon">&#9989;</span>
+        <h4>Maine Homeschool Checklist</h4>
+        <p>Documentation requirements for Maine homeschool families</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/hs-credit-summary.pdf" target="_blank" class="resource-card" data-category="family">
+        <span class="resource-icon">&#127891;</span>
+        <h4>HS Credit Summary</h4>
+        <p>High school credit tracker &amp; parent submission sheet</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+
+      <!-- LLA Documents — Teacher -->
+      <a href="docs/teacher-guidebook.pdf" target="_blank" class="resource-card" data-category="teacher">
+        <span class="resource-icon">&#128214;</span>
+        <h4>Teacher &amp; Mentor Guidebook</h4>
+        <p>Vision, role of the teacher, classroom philosophy (2025 Ed.)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/teacher-volunteer-expectations.pdf" target="_blank" class="resource-card" data-category="teacher">
+        <span class="resource-icon">&#129309;</span>
+        <h4>Teacher &amp; Volunteer Expectations</h4>
+        <p>Role clarity, authority &amp; boundaries (v1.0)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/supervision-sop.pdf" target="_blank" class="resource-card" data-category="teacher policy">
+        <span class="resource-icon">&#128737;&#65039;</span>
+        <h4>Supervision &amp; Room Operations SOP</h4>
+        <p>Operational procedures for co-op days (v1.0)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/training-acknowledgment.pdf" target="_blank" class="resource-card" data-category="teacher">
+        <span class="resource-icon">&#9997;&#65039;</span>
+        <h4>Training &amp; Acknowledgment</h4>
+        <p>Orientation framework for teachers &amp; volunteers (v1.0)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+
+      <!-- LLA Documents — Policy -->
+      <a href="docs/safety-emergency-plan.pdf" target="_blank" class="resource-card" data-category="policy">
+        <span class="resource-icon">&#128737;&#65039;</span>
+        <h4>Student Safety &amp; Emergency Plan</h4>
+        <p>Background checks, emergencies, supervision ratios (v1.1)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/discipline-policy.pdf" target="_blank" class="resource-card" data-category="policy">
+        <span class="resource-icon">&#9878;&#65039;</span>
+        <h4>Escalation &amp; Discipline Policy</h4>
+        <p>Levels of behavior, responses &amp; restoration (v1.1)</p>
+        <span class="resource-tag tag-pdf">PDF</span>
+      </a>
+      <a href="docs/policy-index.pdf" target="_blank" class="resource-card" data-category="policy">
+        <span class="resource-icon">&#128209;</span>
+        <h4>Policy Index</h4>
+        <p>Master index of authoritative policy documents</p>
+        <span class="resource-tag tag-pdf">PDF</span>
       </a>
     </div>
   </div>
