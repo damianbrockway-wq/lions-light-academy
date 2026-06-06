@@ -10,6 +10,7 @@ import os
 
 NAVY     = HexColor("#1A2E5C")
 GREY     = HexColor("#5A6B7B")
+ACCENT   = HexColor("#1565C0")
 BORDER   = HexColor("#A8B5C2")
 FIELDBG  = HexColor("#F5F8FB")
 RULE     = HexColor("#D6DEE6")
@@ -32,12 +33,21 @@ def fid(prefix):
     state["fid"] += 1
     return f"{prefix}_{state['fid']}"
 
+SITE_URL = "https://lions-light-academy.pages.dev"
+
 def footer():
     c.setFont("Helvetica", 8)
     c.setFillColor(GREY)
     c.drawCentredString(PAGE_W/2, 0.4*inch,
         "Lions Light Academy  •  Field Trip Waiver  •  Fall 2026 — v1.0")
     c.drawRightString(PAGE_W - RM, 0.4*inch, f"Page {state['page']}")
+    # Clickable back-to-site link in the footer (left side)
+    c.setFillColor(ACCENT)
+    c.setFont("Helvetica-Bold", 8.5)
+    back_text = "← Back to Lions Light Academy"
+    c.drawString(LM, 0.4*inch, back_text)
+    tw = c.stringWidth(back_text, "Helvetica-Bold", 8.5)
+    c.linkURL(SITE_URL, (LM, 0.36*inch, LM + tw, 0.55*inch), relative=0)
 
 def new_page():
     footer()
@@ -169,30 +179,34 @@ def agree(text):
 draw_header_full()
 
 # A simple intro note explaining what this is (and what it isn't)
-need(0.9*inch)
+about = ("This form gives permission for your child to attend a specific LLA field trip. The Liability Release, Medical Emergency "
+         "Consent, and Photo/Media Preference you signed at enrollment remain in effect — not duplicated here. "
+         "To fill on screen: download this file and open it in Preview (Mac), Files / Adobe Acrobat (iPhone or Android), "
+         "or Acrobat Reader (Windows). Browser PDF viewers usually don't show form fields. You can also print and fill by hand.")
+# Pre-wrap to get line count
+c.setFont("Helvetica", 9.5)
+tw = CW - 0.30*inch
+words = about.split(); about_lines = []; line = ""
+for w in words:
+    if c.stringWidth(line+" "+w,"Helvetica",9.5) > tw:
+        about_lines.append(line); line = w
+    else:
+        line = (line+" "+w).strip()
+if line: about_lines.append(line)
+box_h = 0.30*inch + 0.16*inch*len(about_lines) + 0.10*inch  # header + lines + bottom padding
+need(box_h + 0.20*inch)
 top = state["y"]
 c.setStrokeColor(BORDER); c.setLineWidth(0.75)
 c.setFillColor(NOTEBG)
-c.roundRect(LM, top-0.78*inch, CW, 0.78*inch, 5, fill=1, stroke=1)
+c.roundRect(LM, top-box_h, CW, box_h, 5, fill=1, stroke=1)
 c.setFillColor(NAVY); c.setFont("Helvetica-Bold", 9.5)
-c.drawString(LM+0.12*inch, top-0.18*inch, "About this form")
+c.drawString(LM+0.12*inch, top-0.18*inch, "About this form  —  How to fill it out")
 c.setFillColor(black); c.setFont("Helvetica", 9.5)
-about = ("This form gives permission for your child to attend a specific Lions Light Academy field trip. "
-         "The Liability Release, Medical Emergency Consent, and Photo/Media Preference you signed at "
-         "enrollment remain in effect for all LLA activities — including trips — and are not duplicated here.")
-words = about.split(); lines = []; line = ""
-tw = CW - 0.30*inch
-for w in words:
-    if c.stringWidth(line+" "+w,"Helvetica",9.5) > tw:
-        lines.append(line); line = w
-    else:
-        line = (line+" "+w).strip()
-if line: lines.append(line)
-yy = top - 0.35*inch
-for ln in lines:
+yy = top - 0.36*inch
+for ln in about_lines:
     c.drawString(LM+0.12*inch, yy, ln)
     yy -= 0.16*inch
-state["y"] = top - 0.92*inch
+state["y"] = top - box_h - 0.14*inch
 
 # ─── 1. Trip ───
 h_section("1. Trip Information  (completed by leadership)")
