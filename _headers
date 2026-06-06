@@ -1,15 +1,47 @@
-# Force the fillable PDFs to download instead of preview in-browser.
-# Required because Safari (mac & iOS) ignores the HTML download attribute
-# for PDFs and shows them inline with no controls.
+# Force every LLA PDF to download instead of opening in the browser's
+# inline viewer. Required because Safari (Mac and iOS) ignores the HTML
+# download attribute for PDFs and traps users in a preview with no
+# controls — no Download, no Print, no Back. Content-Disposition is an
+# HTTP-level instruction; the browser must obey.
 
 /LLA_Enrollment_Application_Fillable.pdf
   Content-Disposition: attachment; filename="LLA-Enrollment-Application.pdf"
 
-/docs/field-trip-waiver.pdf
-  Content-Disposition: attachment; filename="LLA-Field-Trip-Waiver.pdf"
+/docs/parent-packet.pdf
+  Content-Disposition: attachment; filename="LLA-Parent-Packet.pdf"
+
+/docs/code-of-conduct.pdf
+  Content-Disposition: attachment; filename="LLA-Code-of-Conduct.pdf"
+
+/docs/coop-day-schedule.pdf
+  Content-Disposition: attachment; filename="LLA-CoOp-Day-Schedule.pdf"
+
+/docs/maine-homeschool-checklist.pdf
+  Content-Disposition: attachment; filename="LLA-Maine-Homeschool-Checklist.pdf"
 
 /docs/hs-credit-summary.pdf
   Content-Disposition: attachment; filename="LLA-HS-Credit-Summary.pdf"
 
-/docs/maine-homeschool-checklist.pdf
-  Content-Disposition: attachment; filename="LLA-Maine-Homeschool-Checklist.pdf"
+/docs/field-trip-waiver.pdf
+  Content-Disposition: attachment; filename="LLA-Field-Trip-Waiver.pdf"
+
+/docs/teacher-guidebook.pdf
+  Content-Disposition: attachment; filename="LLA-Teacher-Guidebook.pdf"
+
+/docs/teacher-volunteer-expectations.pdf
+  Content-Disposition: attachment; filename="LLA-Teacher-Volunteer-Expectations.pdf"
+
+/docs/supervision-sop.pdf
+  Content-Disposition: attachment; filename="LLA-Supervision-SOP.pdf"
+
+/docs/training-acknowledgment.pdf
+  Content-Disposition: attachment; filename="LLA-Training-Acknowledgment.pdf"
+
+/docs/safety-emergency-plan.pdf
+  Content-Disposition: attachment; filename="LLA-Safety-Emergency-Plan.pdf"
+
+/docs/discipline-policy.pdf
+  Content-Disposition: attachment; filename="LLA-Discipline-Policy.pdf"
+
+/docs/policy-index.pdf
+  Content-Disposition: attachment; filename="LLA-Policy-Index.pdf"
