@@ -2626,10 +2626,16 @@
   })();
 
   // ── Countdown Timer ──
-  // Automatically counts down to the next Tuesday at 9:00 AM Eastern, every week
+  // First meetup anchor: Tuesday, September 15, 2026 at 9:00 AM Eastern.
+  // After that date, the countdown auto-advances to the same time the following Tuesday, every week.
   (function() {
-    function getNextTuesday9AMEastern() {
-      // Get current time expressed in Eastern timezone
+    // The 2026-09-15 09:00 America/New_York moment, expressed as UTC.
+    // EDT (UTC-4) is in effect on this date.
+    const FIRST_MEETUP_MS = Date.UTC(2026, 8, 15, 13, 0, 0);  // 13:00 UTC = 09:00 EDT
+    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
+    // Compute the next-Tuesday-at-9-AM-Eastern after the anchor date, respecting DST.
+    function getNextWeeklyMeetup() {
       const now = new Date();
       const eastern = new Intl.DateTimeFormat('en-US', {
         timeZone: 'America/New_York',
@@ -2640,31 +2646,30 @@
       eastern.forEach(({ type, value }) => { p[type] = value; });
       const etYear = +p.year, etMonth = +p.month - 1, etDay = +p.day;
       const etHour = +p.hour, etMinute = +p.minute;
-      // Figure out day of week in Eastern time
       const etNow = new Date(etYear, etMonth, etDay);
-      const dayOfWeek = etNow.getDay(); // 0=Sun, 2=Tue
+      const dayOfWeek = etNow.getDay(); // 0=Sun … 2=Tue
       let daysUntil = (2 - dayOfWeek + 7) % 7;
-      // If it's already Tuesday, check if 9:00 AM has passed
-      if (daysUntil === 0 && (etHour > 9 || (etHour === 9 && etMinute >= 0))) {
-        daysUntil = 7;
-      }
-      // Build the target Tuesday at 09:00 in local/system time
+      if (daysUntil === 0 && (etHour > 9 || (etHour === 9 && etMinute >= 0))) daysUntil = 7;
       const target = new Date(now.getTime() + daysUntil * 86400000);
-      // Adjust to 9:00 AM Eastern: find the offset between now-Eastern and now-local
       const localRef = new Date(etYear, etMonth, etDay, etHour, etMinute);
       const offsetMs = now.getTime() - localRef.getTime();
-      // Set target to 9:00 AM Eastern (converted to system time)
       target.setHours(0, 0, 0, 0);
       return new Date(target.getTime() + (9 * 3600000) + offsetMs);
     }
 
-    let meetupDate = getNextTuesday9AMEastern();
+    function getNextMeetup() {
+      const now = new Date();
+      if (now.getTime() < FIRST_MEETUP_MS) return new Date(FIRST_MEETUP_MS);
+      return getNextWeeklyMeetup();
+    }
+
+    let meetupDate = getNextMeetup();
 
     function updateCountdown() {
       const now = new Date();
       let diff = meetupDate - now;
       if (diff <= 0) {
-        meetupDate = getNextTuesday9AMEastern();
+        meetupDate = getNextMeetup();
         diff = meetupDate - now;
       }
       if (diff <= 0) {
