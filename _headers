@@ -1,0 +1,15 @@
+# Force the fillable PDFs to download instead of preview in-browser.
+# Required because Safari (mac & iOS) ignores the HTML download attribute
+# for PDFs and shows them inline with no controls.
+
+/LLA_Enrollment_Application_Fillable.pdf
+  Content-Disposition: attachment; filename="LLA-Enrollment-Application.pdf"
+
+/docs/field-trip-waiver.pdf
+  Content-Disposition: attachment; filename="LLA-Field-Trip-Waiver.pdf"
+
+/docs/hs-credit-summary.pdf
+  Content-Disposition: attachment; filename="LLA-HS-Credit-Summary.pdf"
+
+/docs/maine-homeschool-checklist.pdf
+  Content-Disposition: attachment; filename="LLA-Maine-Homeschool-Checklist.pdf"
