@@ -14,8 +14,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LLA Hub">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
   :root {
     --navy: #0A1929;
@@ -1945,7 +1947,7 @@
     <p class="section-sub">Three learning levels, one united co-op. Tap a card to see classes, then jump straight into Google Classroom.</p>
   </div>
   <div class="classes-grid reveal">
-    <div class="class-card class-card-elem" onclick="this.classList.toggle('expanded')">
+    <div class="class-card class-card-elem" tabindex="0" role="button" aria-expanded="false" onclick="this.classList.toggle('expanded'); this.setAttribute('aria-expanded', this.classList.contains('expanded'));" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <span class="class-icon">&#9997;&#65039;</span>
       <h4>Elementary</h4>
       <div class="class-grades">Grades K – 5</div>
@@ -1966,7 +1968,7 @@
         </a>
       </div>
     </div>
-    <div class="class-card class-card-ms" onclick="this.classList.toggle('expanded')">
+    <div class="class-card class-card-ms" tabindex="0" role="button" aria-expanded="false" onclick="this.classList.toggle('expanded'); this.setAttribute('aria-expanded', this.classList.contains('expanded'));" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <span class="class-icon">&#128218;</span>
       <h4>Middle School</h4>
       <div class="class-grades">Grades 5 – 8</div>
@@ -1987,7 +1989,7 @@
         </a>
       </div>
     </div>
-    <div class="class-card class-card-hs" onclick="this.classList.toggle('expanded')">
+    <div class="class-card class-card-hs" tabindex="0" role="button" aria-expanded="false" onclick="this.classList.toggle('expanded'); this.setAttribute('aria-expanded', this.classList.contains('expanded'));" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <span class="class-icon">&#127891;</span>
       <h4>High School</h4>
       <div class="class-grades">Grades 9 – 12</div>
@@ -2168,6 +2170,8 @@
       var slides = c.querySelectorAll('.lla-slide');
       var dotsBox = document.getElementById('llaDots');
       var counter = document.getElementById('llaCounterCurrent');
+      var counterTotal = document.getElementById('llaCounterTotal');
+      if (counterTotal) counterTotal.textContent = slides.length;
       var current = 0, timer = null, INTERVAL = 7500;
 
       slides.forEach(function(_, i){
@@ -2309,14 +2313,14 @@
   </div>
 
   <div class="reveal">
-    <div class="library-tabs">
-      <button class="library-tab active" data-lib="all">All</button>
-      <button class="library-tab" data-lib="family">Family</button>
-      <button class="library-tab" data-lib="teacher">Teacher</button>
-      <button class="library-tab" data-lib="policy">Policy</button>
-      <button class="library-tab" data-lib="curriculum">Curriculum</button>
-      <button class="library-tab" data-lib="video">Video &amp; Media</button>
-      <button class="library-tab" data-lib="maine">Maine Legal</button>
+    <div class="library-tabs" role="tablist" aria-label="Resource categories">
+      <button class="library-tab active" data-lib="all" role="tab" aria-selected="true">All</button>
+      <button class="library-tab" data-lib="family" role="tab" aria-selected="false">Family</button>
+      <button class="library-tab" data-lib="teacher" role="tab" aria-selected="false">Teacher</button>
+      <button class="library-tab" data-lib="policy" role="tab" aria-selected="false">Policy</button>
+      <button class="library-tab" data-lib="curriculum" role="tab" aria-selected="false">Curriculum</button>
+      <button class="library-tab" data-lib="video" role="tab" aria-selected="false">Video &amp; Media</button>
+      <button class="library-tab" data-lib="maine" role="tab" aria-selected="false">Maine Legal</button>
     </div>
 
     <div class="resources-grid" id="libraryGrid">
@@ -2562,7 +2566,8 @@
       <h3>Parent Connect</h3>
       <p class="gate-desc">Enter the co-op password to view teacher advisories and notes.</p>
       <div class="portal-form" id="portalForm">
-        <input type="password" id="portalPassword" placeholder="Enter parent password" autocomplete="off">
+        <label for="portalPassword" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Parent portal password</label>
+        <input type="password" id="portalPassword" placeholder="Enter parent password" aria-label="Parent portal password" autocomplete="off">
         <button onclick="attemptLogin()">Sign In</button>
       </div>
       <p class="portal-error" id="portalError">Incorrect password. Please try again.</p>
@@ -2776,8 +2781,11 @@
   // ── Spotlight Carousel Nav ──
   (function() {
     const carousel = document.getElementById('spotlightCarousel');
+    if (!carousel) return;
     const cards = carousel.querySelectorAll('.spotlight-card');
     const nav = document.getElementById('spotlightNav');
+    // Guard: nothing to navigate when spotlights are empty
+    if (!nav || cards.length === 0) return;
     const visibleCount = Math.floor(carousel.offsetWidth / 290) || 1;
     const dotCount = Math.max(1, cards.length - visibleCount + 1);
 
@@ -2785,7 +2793,7 @@
       const dot = document.createElement('div');
       dot.className = 'spotlight-dot' + (i === 0 ? ' active' : '');
       dot.onclick = () => {
-        cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        if (cards[i]) cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
       };
       nav.appendChild(dot);
     }
@@ -2844,22 +2852,7 @@
     document.getElementById('onboardCongrats').style.display = done === total ? 'block' : 'none';
   }
 
-  // ── Prayer Board ──
-  function addPrayerEntry() {
-    const name = document.getElementById('prayerName').value.trim();
-    const type = document.getElementById('prayerType').value;
-    const message = document.getElementById('prayerMessage').value.trim();
-    if (!name || !message) { alert('Please enter your family name and a message.'); return; }
-    const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const entryHTML = `<div class="prayer-item" style="animation: fadeIn 0.4s ease;"><div class="prayer-item-header"><span class="prayer-item-author">${name}</span><span class="prayer-item-date">${dateStr}</span></div><p class="prayer-item-text">${message}</p></div>`;
-    const column = type === 'prayer' ? document.querySelector('.col-prayers') : document.querySelector('.col-encouragements');
-    column.querySelector('h4').insertAdjacentHTML('afterend', entryHTML);
-    document.getElementById('prayerName').value = '';
-    document.getElementById('prayerMessage').value = '';
-  }
-
-  // ── Snow Day Connect ──
-  // Snowflake animation
+  // ── Snowflake animation (still used in the Snow Day section) ──
   (function initSnowflakes() {
     const container = document.getElementById('snowflakes');
     if (!container) return;
@@ -2877,54 +2870,15 @@
     }
   })();
 
-  // Tab switching for Snow Day panels
-  document.querySelectorAll('.snow-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      const group = this.closest('.snowday-tabs');
-      group.querySelectorAll('.snow-tab').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-      const target = this.dataset.tab;
-      const panels = this.closest('.snowday-content, .snowday-section').querySelectorAll('.snow-panel');
-      panels.forEach(p => {
-        p.classList.remove('active');
-        if (p.id === target) p.classList.add('active');
-      });
-    });
-  });
-
-  // Post a meetup to the Snow Day board
-  function addSnowProject() {
-    const name = document.getElementById('snowName').value.trim();
-    const time = document.getElementById('snowTime').value.trim();
-    const desc = document.getElementById('snowDesc').value.trim();
-    if (!name || !desc) { alert('Please enter your name and a description!'); return; }
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const timeLabel = time || 'Flexible';
-    const postHTML = `
-      <div class="project-post" style="animation: fadeIn 0.4s ease;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-          <strong style="color: var(--accent);">${name}</strong>
-          <span style="font-size: 0.7rem; color: var(--text-muted);">${dateStr}</span>
-        </div>
-        <p style="font-size: 0.85rem; margin-bottom: 0.35rem;">${desc}</p>
-        <span style="display: inline-block; background: var(--blue-bg); color: var(--blue); font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;">⏰ ${timeLabel}</span>
-      </div>`;
-    const panels = document.querySelectorAll('.snowday-grid .snowday-panel');
-    const board = panels[0]; // First panel is the Project Meetup Board
-    if (board) {
-      board.querySelector('h4').insertAdjacentHTML('afterend', postHTML);
-    }
-    document.getElementById('snowName').value = '';
-    document.getElementById('snowTime').value = '';
-    document.getElementById('snowDesc').value = '';
-  }
-
   // ── Resource Library Tab Filtering ──
   document.querySelectorAll('.library-tab').forEach(tab => {
     tab.addEventListener('click', function() {
-      document.querySelectorAll('.library-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.library-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
       this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
       const filter = this.dataset.lib;
       document.querySelectorAll('#libraryGrid .resource-card').forEach(card => {
         if (filter === 'all') {
@@ -2997,6 +2951,72 @@
     } else {
       loadPrayerFeed();
     }
+  })();
+</script>
+
+<!-- ── Bulletproof PDF download (Safari iOS + Mac fallback) ── -->
+<!-- Some browsers ignore both Content-Disposition: attachment AND the HTML
+     download attribute for PDFs, especially on iOS. This script intercepts
+     clicks on any <a> marked data-force-download, fetches the file as a
+     blob, and triggers a programmatic download. Works on every modern
+     browser including Safari iOS. -->
+<script>
+  (function(){
+    // Auto-tag the four fillable PDFs so we don't depend on hand-editing every <a>
+    var FILLABLE = [
+      'LLA_Enrollment_Application_Fillable.pdf',
+      'docs/field-trip-waiver.pdf',
+      'docs/hs-credit-summary.pdf',
+      'docs/maine-homeschool-checklist.pdf'
+    ];
+    document.querySelectorAll('a[href]').forEach(function(a){
+      var href = a.getAttribute('href') || '';
+      var match = FILLABLE.some(function(p){ return href.indexOf(p) >= 0; });
+      if (match) a.setAttribute('data-force-download', '');
+    });
+
+    function suggestedName(href){
+      var base = href.split('/').pop().split('?')[0];
+      if (base.indexOf('field-trip-waiver') >= 0) return 'LLA-Field-Trip-Waiver.pdf';
+      if (base.indexOf('hs-credit-summary') >= 0) return 'LLA-HS-Credit-Summary.pdf';
+      if (base.indexOf('maine-homeschool') >= 0)  return 'LLA-Maine-Homeschool-Checklist.pdf';
+      if (base.indexOf('Enrollment_Application') >= 0) return 'LLA-Enrollment-Application.pdf';
+      return base || 'document.pdf';
+    }
+
+    function forceDownload(url, filename){
+      // Show a quick visual cue
+      var prev = document.title;
+      document.title = '⬇ Downloading…';
+      fetch(url, { cache: 'no-store' })
+        .then(function(r){ if (!r.ok) throw new Error(r.status); return r.blob(); })
+        .then(function(blob){
+          var blobUrl = URL.createObjectURL(blob);
+          var link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = filename;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(function(){
+            document.body.removeChild(link);
+            URL.revokeObjectURL(blobUrl);
+            document.title = prev;
+          }, 1500);
+        })
+        .catch(function(err){
+          document.title = prev;
+          // Fallback: open in new tab so user at least sees the file
+          window.open(url, '_blank', 'noopener');
+        });
+    }
+
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[data-force-download]');
+      if (!a) return;
+      e.preventDefault();
+      forceDownload(a.getAttribute('href'), suggestedName(a.getAttribute('href')));
+    });
   })();
 </script>
 
