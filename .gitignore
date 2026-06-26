@@ -1,0 +1,4 @@
+# Local backups & scratch files — keep locally, don't deploy
+index-*BACKUP*.html
+icon_preview.png
+mark_white.png
