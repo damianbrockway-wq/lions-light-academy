@@ -70,6 +70,18 @@
   .enrollbar .eb-inner{display:flex;align-items:center;gap:14px;padding:10px 14px 10px 20px;font-size:.86rem;font-weight:600;white-space:nowrap}
   .enrollbar .eb-inner a{background:rgba(7,15,28,.16);padding:7px 14px;border-radius:999px;color:#0a1422;font-weight:700}
   .eb-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#0c5a32;margin-right:5px;vertical-align:middle}
+  .eb-close{margin-left:2px;width:24px;height:24px;flex:none;border:none;border-radius:50%;background:rgba(10,20,34,.14);color:#0a1422;font-size:1.15rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+  .eb-close:hover{background:rgba(10,20,34,.28)}
+  .nav-burger{display:none;margin-left:12px;width:42px;height:42px;flex:none;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+  .nav-burger span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-burger.open span:nth-child(2){opacity:0}
+  .nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .mobile-menu{display:none;flex-direction:column;gap:2px;padding:8px 14px 16px;border-top:1px solid var(--line);background:rgba(7,15,28,.97);backdrop-filter:blur(14px)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{padding:13px 10px;border-radius:10px;color:var(--text);font-size:.98rem;border-bottom:1px solid rgba(255,255,255,.04)}
+  .mobile-menu a:hover{background:var(--card-hi)}
+  @media(max-width:900px){.nav-burger{display:flex}.nav-cta{margin-left:auto}}
   .wordmark span{display:inline-block;opacity:0;transform:translateY(16px);animation:wordin .7s cubic-bezier(.2,.7,.2,1) forwards;color:#f3f7fb;-webkit-text-fill-color:#f3f7fb}
   .wordmark span:nth-child(1){animation-delay:.15s}.wordmark span:nth-child(2){animation-delay:.3s}.wordmark span:nth-child(3){animation-delay:.45s}
   @keyframes wordin{to{opacity:1;transform:none}}
@@ -180,7 +192,7 @@
 
   /* calendar */
   .cal-frame{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:var(--navy-800)}
-  .cal-frame iframe{width:100%;height:560px;border:0;display:block}
+  .cal-frame iframe{width:100%;height:560px;border:0;display:block;filter:invert(.92) hue-rotate(180deg) saturate(.85) contrast(.95)}
 
   /* classes */
   .class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -392,7 +404,7 @@
 <a class="skip" href="#showcase">Skip to content</a>
 <div class="bg-aura"></div><div class="grain"></div><div class="scrollprog" id="scrollprog"></div>
 <!-- sticky enroll bar -->
-<div class="enrollbar" id="enrollbar"><div class="eb-inner"><span><span class="eb-dot"></span> Now enrolling for 2026–2027</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener">Apply online →</a></div></div>
+<div class="enrollbar" id="enrollbar"><div class="eb-inner"><span><span class="eb-dot"></span> Now enrolling for 2026–2027</span><a href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener">Apply online →</a><button class="eb-close" id="ebClose" aria-label="Dismiss">&times;</button></div></div>
 
 <!-- NAV -->
 <nav>
@@ -407,6 +419,17 @@
       <a href="#resources">Resources</a>
     </div>
     <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener">Apply</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#showcase">Showcase</a>
+    <a href="#links">Quick Links</a>
+    <a href="#classes">Classes</a>
+    <a href="#calendar">Calendar</a>
+    <a href="#prayer">Prayer</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#resources">Resources</a>
+    <a href="#parent-portal">Parent Portal</a>
   </div>
 </nav>
 
@@ -810,10 +833,24 @@
     addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();else if(e.key==='ArrowRight')openLb(lbi+1);else if(e.key==='ArrowLeft')openLb(lbi-1);});
   })();
 
-  /* ── Sticky enroll bar ── */
+  /* ── Sticky enroll bar (show once, auto-hide, dismissable) ── */
   (function(){
     const eb=document.getElementById('enrollbar');if(!eb)return;
-    addEventListener('scroll',()=>{const y=scrollY;const nearFoot=(innerHeight+y)>(document.body.scrollHeight-220);eb.classList.toggle('show',y>540&&!nearFoot);},{passive:true});
+    let shown=false,done=false,t;
+    function hide(){eb.classList.remove('show');done=true;clearTimeout(t);}
+    const c=document.getElementById('ebClose');if(c)c.addEventListener('click',hide);
+    addEventListener('scroll',()=>{
+      if(done||shown)return;
+      const y=scrollY,nearFoot=(innerHeight+y)>(document.body.scrollHeight-260);
+      if(y>560&&!nearFoot){shown=true;eb.classList.add('show');t=setTimeout(hide,6500);}
+    },{passive:true});
+  })();
+
+  /* ── Mobile menu ── */
+  (function(){
+    const b=document.getElementById('navBurger'),m=document.getElementById('mobileMenu');if(!b||!m)return;
+    b.addEventListener('click',()=>{const o=m.classList.toggle('open');b.classList.toggle('open',o);b.setAttribute('aria-expanded',o);});
+    m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open');b.classList.remove('open');b.setAttribute('aria-expanded','false');}));
   })();
 
 
