@@ -8,8 +8,11 @@
 # so visitors can just read them. Anyone who wants to save those can use
 # the browser's built-in PDF Save / Share menu.
 
-/LLA_Enrollment_Application_Fillable.pdf
-  Content-Disposition: attachment; filename="LLA-Enrollment-Application.pdf"
+/docs/registration-enrollment.pdf
+  Content-Disposition: attachment; filename="LLA-Registration-2026-2027.pdf"
+
+/docs/supply-fee-receipt.pdf
+  Content-Disposition: attachment; filename="LLA-Supply-Fee-Receipt.pdf"
 
 /docs/field-trip-waiver.pdf
   Content-Disposition: attachment; filename="LLA-Field-Trip-Waiver.pdf"
