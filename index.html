@@ -1000,13 +1000,24 @@
     });
   })();
 
-  /* ── Next class: co-op meets every Tuesday, 8:45 AM – 1:45 PM ── */
+  /* ── Next class: co-op meets every Tuesday, 8:45 AM – 1:45 PM ──
+     FIRST_CLASS is the first co-op day of the term. Before it, the banner
+     shows that date rather than computing a Tuesday no class falls on.
+     Update it each year. ── */
   (function(){
     var el = document.getElementById('nextClass');
     if(!el) return;
+    var FIRST_CLASS = new Date(2026, 8, 15);   /* Tue 15 Sep 2026 (month is 0-based) */
+    var TUE = 2;
+    var fmt = function(x){ return x.toLocaleDateString('en-US',
+                {weekday:'long', month:'short', day:'numeric'}); };
+
     var now = new Date();
     var d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var TUE = 2;
+
+    /* term hasn't started — the first class is the answer */
+    if(d < FIRST_CLASS){ el.textContent = fmt(FIRST_CLASS); return; }
+
     var endOfDay = new Date(d); endOfDay.setHours(13,45,0,0);
     if(now.getDay() === TUE && now < endOfDay){
       el.textContent = 'Today';
@@ -1015,8 +1026,7 @@
     var ahead = (TUE - d.getDay() + 7) % 7;
     if(ahead === 0) ahead = 7;               /* Tuesday, but the day is over */
     d.setDate(d.getDate() + ahead);
-    el.textContent = d.toLocaleDateString('en-US',
-      {weekday:'long', month:'short', day:'numeric'});
+    el.textContent = fmt(d);
   })();
 </script>
 </body>
