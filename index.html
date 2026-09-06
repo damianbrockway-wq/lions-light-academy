@@ -398,6 +398,36 @@
     .medallion{width:240px;height:240px}.medallion img{width:186px;height:186px}
     .snowday-panel [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr!important}
   }
+  /* ── Give / sponsorship ── */
+  .give-lede{max-width:660px;margin:0 auto 34px;text-align:center;color:var(--text-dim);font-size:1.02rem}
+  .give-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-bottom:26px}
+  .give-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px 24px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+  .give-card.feature{border-color:rgba(230,189,99,.4);background:linear-gradient(160deg,rgba(230,189,99,.09),var(--card))}
+  .give-card .amt{font-family:'Fraunces',serif;font-size:2.3rem;line-height:1;color:var(--gold);letter-spacing:-.02em}
+  .give-card .amt small{font-family:'Inter',sans-serif;font-size:.8rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-muted);display:block;margin-top:8px;font-weight:600}
+  .give-card h4{font-size:1.12rem;margin-top:2px}
+  .give-card p{font-size:.92rem;color:var(--text-dim);line-height:1.55}
+  .give-card .tagline{position:absolute;top:0;right:0;font-size:.62rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--navy-900);background:var(--gold);padding:5px 12px;border-bottom-left-radius:10px}
+  .give-how{background:var(--s1);border:1px solid var(--border);border-radius:var(--radius);padding:30px 28px}
+  .give-how h3{font-size:1.24rem;margin-bottom:6px}
+  .give-how .sub{color:var(--text-muted);font-size:.9rem;margin-bottom:20px}
+  .give-ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .give-way{display:flex;gap:13px;align-items:flex-start}
+  .give-way .ico{flex:none;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+    background:rgba(230,189,99,.12);border:1px solid rgba(230,189,99,.25)}
+  .give-way .ico svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round}
+  .give-way h5{font-family:'Inter',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--head);margin-bottom:5px}
+  .give-way p{font-size:.92rem;color:var(--text-dim);line-height:1.55}
+  .give-way code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;
+    background:rgba(255,255,255,.06);border-radius:4px;padding:1px 6px;color:var(--gold-bright)}
+  .give-note{margin-top:26px;padding-top:20px;border-top:1px solid var(--border);
+    font-size:.86rem;color:var(--text-muted);line-height:1.62}
+  .give-note b{color:var(--text-dim);font-weight:600}
 </style>
 </head>
 <body>
@@ -417,6 +447,7 @@
       <a href="#calendar">Calendar</a>
       <a href="#gallery">Gallery</a>
       <a href="#resources">Resources</a>
+      <a href="#give">Give</a>
     </div>
     <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener">Apply</a>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -429,6 +460,7 @@
     <a href="#prayer">Prayer</a>
     <a href="#gallery">Gallery</a>
     <a href="#resources">Resources</a>
+    <a href="#give">Give</a>
     <a href="#parent-portal">Parent Portal</a>
   </div>
 </nav>
@@ -710,10 +742,66 @@
   </div>
 </section>
 
+<!-- GIVE -->
+<section class="section reveal tight" id="give">
+  <div class="wrap">
+    <div class="section-header" data-num="11"><h2>Sponsor a Student</h2><div class="section-line"></div>
+      <p class="section-sub">Two hundred dollars covers one student for the whole year.</p></div>
+
+    <p class="give-lede">Every family pays a supply fee so the co-op can buy what the classes need. Some years a family can&rsquo;t. When someone sponsors that student, nobody has to have the conversation about it &mdash; the child just shows up on Tuesday and gets to work.</p>
+
+    <div class="give-grid">
+      <div class="give-card feature">
+        <span class="tagline">Full year</span>
+        <div class="amt">$200<small>Sponsor one student</small></div>
+        <h4>A whole year, covered</h4>
+        <p>The same supply fee every family pays. It buys that student a seat in all four of their classes from September through May.</p>
+      </div>
+      <div class="give-card">
+        <div class="amt">$50<small>Fills a shelf</small></div>
+        <h4>Classroom supplies</h4>
+        <p>Paper, brushes, glue, garden soil, lab notebooks. The ordinary things that run out by January.</p>
+      </div>
+      <div class="give-card">
+        <div class="amt">Any<small>Whatever you can</small></div>
+        <h4>Equipment &amp; the room</h4>
+        <p>Toward larger things a class needs for a term, and toward the church that gives us the space every Tuesday.</p>
+      </div>
+    </div>
+
+    <div class="give-how">
+      <h3>How to give</h3>
+      <p class="sub">No online payments. Two ways, both simple.</p>
+      <div class="give-ways">
+        <div class="give-way">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h5"/></svg></div>
+          <div>
+            <h5>By check</h5>
+            <p>Made out to <b>Damian Brockway</b>, with <code>LLA supplies</code> on the memo line. Hand it in on a Tuesday or mail it.</p>
+          </div>
+        </div>
+        <div class="give-way">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+          <div>
+            <h5>Cash</h5>
+            <p>Give it to Damian or Ginny on a co-op day. You&rsquo;ll get a written receipt the same morning.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="give-note">
+        <b>Please read this before you give.</b> Lions Light Academy is a small homeschool co-op, not a registered nonprofit. We do not have 501(c)(3) status and <b>your gift is not tax&#8209;deductible.</b> Funds are held in a personal account because the co-op has no bank account of its own, and every dollar goes to classroom supplies, equipment, and the church that hosts us. We keep a written record of what comes in and what it buys, and any family may ask to see it.
+        <br><br>
+        If you want to sponsor a specific student, say so and the full amount goes to that family&rsquo;s fee. Otherwise it goes to whoever needs it first.
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- SNOW DAY -->
 <section class="section reveal tight" id="snowday">
   <div class="wrap">
-    <div class="section-header" data-num="11"><h2>Snow Day Connect</h2><div class="section-line"></div></div>
+    <div class="section-header" data-num="12"><h2>Snow Day Connect</h2><div class="section-line"></div></div>
     <div class="snowday-section">
       <div class="snowflakes" id="snowflakes"></div>
       <div class="snowday-content">
@@ -747,7 +835,7 @@
 <!-- PARENT PORTAL -->
 <section class="section reveal tight" id="parent-portal">
   <div class="wrap">
-    <div class="section-header" data-num="12"><h2>Parent Portal</h2><div class="section-line"></div></div>
+    <div class="section-header" data-num="13"><h2>Parent Portal</h2><div class="section-line"></div></div>
     <div class="portal-section">
       <div class="portal-gate" id="portalGate">
         <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -1003,32 +1091,51 @@
     });
   })();
 
-  /* ── Next class: co-op meets every Tuesday, 8:45 AM – 1:45 PM ──
-     FIRST_CLASS is the first co-op day of the term. Before it, the banner
-     shows that date rather than computing a Tuesday no class falls on.
-     Update it each year. ── */
+
+
+  /* ── Next class: co-op meets every Tuesday ──
+     FIRST_CLASS and LAST_CLASS bound the term. Before it starts the banner
+     shows the first day; after it ends the banner retires itself rather than
+     advertising a Tuesday with no class on it. Update BOTH each year. ── */
   (function(){
     var el = document.getElementById('nextClass');
     if(!el) return;
+    var line = el.closest ? el.closest('.next-class') : el.parentNode;
+    if(!line) line = el.parentNode;
+
     var FIRST_CLASS = new Date(2026, 8, 15);   /* Tue 15 Sep 2026 (month is 0-based) */
+    var LAST_CLASS  = new Date(2027, 4, 11);   /* Tue 11 May 2027 */
     var TUE = 2;
     var fmt = function(x){ return x.toLocaleDateString('en-US',
                 {weekday:'long', month:'short', day:'numeric'}); };
 
+    /* replace the whole line but keep its icon */
+    var say = function(text){
+      var svg = line.querySelector('svg');
+      line.textContent = '';
+      if(svg) line.appendChild(svg);
+      line.appendChild(document.createTextNode(' ' + text));
+    };
+
     var now = new Date();
     var d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    /* term is over */
+    if(d > LAST_CLASS){ say('Co-op is out for the summer. See you next fall.'); return; }
 
     /* term hasn't started — the first class is the answer */
     if(d < FIRST_CLASS){ el.textContent = fmt(FIRST_CLASS); return; }
 
     var endOfDay = new Date(d); endOfDay.setHours(13,45,0,0);
-    if(now.getDay() === TUE && now < endOfDay){
-      el.textContent = 'Today';
-      return;
-    }
+    if(now.getDay() === TUE && now < endOfDay){ el.textContent = 'Today'; return; }
+
     var ahead = (TUE - d.getDay() + 7) % 7;
     if(ahead === 0) ahead = 7;               /* Tuesday, but the day is over */
     d.setDate(d.getDate() + ahead);
+
+    /* the next Tuesday falls past the end of the term */
+    if(d > LAST_CLASS){ say('Co-op is out for the summer. See you next fall.'); return; }
+
     el.textContent = fmt(d);
   })();
 </script>
