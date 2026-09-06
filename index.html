@@ -151,6 +151,13 @@
   .nav-links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
   .nav-links a{font-size:.84rem;color:var(--muted);padding:8px 11px;border-radius:10px;transition:.2s}
   .nav-links a:hover{color:var(--text);background:var(--card-hi)}
+  .nav-give{padding:9px 16px!important;font-weight:600;color:var(--gold-bright)!important;
+    border:1px solid rgba(230,189,99,.55);border-radius:10px;background:rgba(230,189,99,.08);
+    transition:.2s;display:inline-flex;align-items:center;gap:7px}
+  .nav-give:hover{background:rgba(230,189,99,.18);border-color:var(--gold-bright)}
+  .nav-give svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  .mobile-menu a.nav-give{justify-content:center;margin-top:8px;border-bottom:1px solid rgba(230,189,99,.55)}
   .nav-cta{padding:9px 18px!important;color:var(--navy-900)!important;font-weight:600;background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));border-radius:10px}
   .nav-cta:hover{filter:brightness(1.06)}
 
@@ -427,6 +434,8 @@
   .give-way h5{font-family:'Inter',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.1em;
     text-transform:uppercase;color:var(--head);margin-bottom:5px}
   .give-way p{font-size:.92rem;color:var(--text-dim);line-height:1.55}
+  .give-link{display:inline-block;margin-top:8px;color:var(--gold-bright);font-weight:600;font-size:.9rem;border-bottom:1px solid rgba(230,189,99,.4);padding-bottom:1px}
+  .give-link:hover{border-bottom-color:var(--gold-bright)}
   .give-way code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;
     background:rgba(255,255,255,.06);border-radius:4px;padding:1px 6px;color:var(--gold-bright)}
   .give-note{margin-top:26px;padding-top:20px;border-top:1px solid var(--border);
@@ -451,7 +460,7 @@
       <a href="#calendar">Calendar</a>
       <a href="#gallery">Gallery</a>
       <a href="#resources">Resources</a>
-      <a href="#give">Give</a>
+      <a class="nav-give" href="#give"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Give</a>
     </div>
     <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSf8tSLMVJCyLb-U58QUE8x9Jo0seVkHBQ_jIaYJ2f_HgATiMQ/viewform" target="_blank" rel="noopener">Apply</a>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -464,7 +473,7 @@
     <a href="#prayer">Prayer</a>
     <a href="#gallery">Gallery</a>
     <a href="#resources">Resources</a>
-    <a href="#give">Give</a>
+    <a class="nav-give" href="#give"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Give</a>
     <a href="#parent-portal">Parent Portal</a>
   </div>
 </nav>
@@ -756,7 +765,7 @@
     <p class="give-lede">Every family pays a supply fee so the co-op can buy what the classes need. Some years a family can&rsquo;t. When someone sponsors that student, nobody has to have the conversation about it &mdash; the child just shows up on Tuesday and gets to work.</p>
 
     <div class="give-cta">
-      <a class="btn btn-primary" href="mailto:lionslightacademy2025@gmail.com?subject=I%20would%20like%20to%20sponsor%20a%20student&body=Hi%20Damian%2C%0A%0AI%27d%20like%20to%20sponsor%20a%20student%20for%20the%202026-2027%20year.%20Please%20let%20me%20know%20the%20next%20step.%0A%0AThanks%2C%0A"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Sponsor a student</a>
+      <a class="btn btn-primary" href="mailto:lionslightacademy2025@gmail.com?subject=I%20would%20like%20to%20sponsor%20a%20student&body=Hi%20Damian%2C%0A%0AI%27d%20like%20to%20sponsor%20a%20student%20for%20the%202026-2027%20year.%20Please%20send%20me%20the%20mailing%20address%20for%20a%20check.%0A%0AThanks%2C%0A"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21.2l7.7-7.8 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Sponsor a student</a>
       <a class="btn btn-ghost" href="mailto:lionslightacademy2025@gmail.com?subject=Question%20about%20giving%20to%20Lions%20Light%20Academy"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/><path d="M9.2 8.6a2.8 2.8 0 0 1 5.4.9c0 1.9-2.8 2.8-2.8 2.8"/><path d="M12 14.6h.01"/></svg> Ask a question first</a>
     </div>
     <p class="give-hint">Both open an email to us. Nothing is charged online &mdash; giving is by check or cash.</p>
@@ -788,7 +797,7 @@
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h5"/></svg></div>
           <div>
             <h5>By check</h5>
-            <p>Made out to <b>Damian Brockway</b>, with <code>LLA supplies</code> on the memo line. Hand it in on a Tuesday or mail it.</p>
+            <p>Made out to <b>Damian Brockway</b>, with <code>LLA supplies</code> on the memo line. Hand it in on a Tuesday, or mail it.<br><a class="give-link" href="mailto:lionslightacademy2025@gmail.com?subject=Where%20do%20I%20mail%20a%20check%3F&body=Hi%20Damian%2C%0A%0AI%27d%20like%20to%20mail%20a%20check.%20Could%20you%20send%20me%20the%20mailing%20address%3F%0A%0AThanks%2C%0A">Email us for the mailing address &rarr;</a></p>
           </div>
         </div>
         <div class="give-way">
