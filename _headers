@@ -22,3 +22,13 @@
 
 /docs/maine-homeschool-checklist.pdf
   Content-Disposition: attachment; filename="LLA-Maine-Homeschool-Checklist.pdf"
+
+# ── Internal kit ────────────────────────────────────────────────────────────
+# /kit/ holds printable masters and templates. Nothing on the site links to it.
+# Cloudflare Pages serves every file in this repo whether or not it is linked,
+# so this is UNLISTED, NOT PRIVATE — the header below only keeps it out of
+# search results. Anyone who has the address can still open it. For a real
+# gate, put a Cloudflare Access policy on /kit/* in the dashboard.
+
+/kit/*
+  X-Robots-Tag: noindex, nofollow, noarchive

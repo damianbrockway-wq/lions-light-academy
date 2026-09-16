@@ -1,0 +1,6 @@
+# Lions Light Academy
+# The internal kit is unlisted: nothing links to it and it should not be indexed.
+# This is obscurity, not access control — anyone with the address can open it.
+
+User-agent: *
+Disallow: /kit/
