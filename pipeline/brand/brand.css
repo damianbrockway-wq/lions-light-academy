@@ -1,0 +1,175 @@
+/* Lions Light Academy — print brand system
+   Derived from the site: Fraunces + Inter, navy ground, gold accent. */
+
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces.ttf') format('truetype');font-weight:100 900;font-display:block}
+@font-face{font-family:'Inter';src:url('fonts/Inter.ttf') format('truetype');font-weight:100 900;font-display:block}
+
+:root{
+  --navy:#0B1626;
+  --navy-deep:#070F1C;
+  --navy-soft:#1B2C42;
+  --gold:#C08A2E;
+  --gold-light:#E6BD63;
+  --gold-pale:#F6EBD4;
+  --ink:#1A2331;
+  --body:#39434F;
+  --muted:#6B7684;
+  --rule:#DFE3E8;
+  --paper:#FFFFFF;
+  --wash:#F8F6F2;
+}
+
+*{box-sizing:border-box}
+
+@page{ size:Letter; margin:19mm 17mm 20mm 17mm; }
+@page:first{ margin:0; }
+
+html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  margin:0; background:var(--paper); color:var(--body);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:10.4pt; line-height:1.62;
+  font-feature-settings:'kern' 1,'liga' 1;
+}
+
+/* ─────────── COVER ─────────── */
+.cover{
+  position:relative; page-break-after:always; break-after:page;
+  height:279.4mm; width:215.9mm; overflow:hidden;
+  background:var(--navy-deep);
+  color:#fff; padding:24mm 22mm 20mm;
+  display:flex; flex-direction:column;
+}
+.cover::before{ /* warm halo */
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(230,189,99,.20), transparent 62%),
+    radial-gradient(90% 60% at 50% 108%, rgba(230,189,99,.10), transparent 60%);
+}
+.cover > *{position:relative}
+
+.cover-body{ flex:1; display:flex; flex-direction:column; justify-content:center; padding-bottom:6mm; }
+.cover-mark{ width:37mm; height:auto; margin:0 auto 12mm; display:block; }
+
+.cover-eyebrow{
+  text-align:center; font-size:8.4pt; font-weight:600;
+  letter-spacing:.30em; text-transform:uppercase;
+  color:var(--gold-light); margin:0 0 9mm;
+}
+.cover-title{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:41pt; line-height:1.06; font-weight:600;
+  color:#fff; text-align:center; margin:0 0 7mm;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 120;
+}
+.cover-sub{
+  text-align:center; font-size:12.4pt; font-weight:400; line-height:1.45;
+  color:rgba(255,255,255,.80); margin:0 auto; max-width:135mm;
+  font-family:'Fraunces',Georgia,serif; font-style:italic;
+}
+.cover-rule{
+  width:34mm; height:2px; margin:11mm auto;
+  background:linear-gradient(90deg,transparent,var(--gold-light),transparent);
+}
+.cover-verse{
+  text-align:center; font-family:'Fraunces',Georgia,serif;
+  font-size:11pt; font-style:italic; line-height:1.62;
+  color:rgba(255,255,255,.62); max-width:132mm; margin:0 auto;
+}
+.cover-verse cite{ display:block; font-style:normal; font-family:'Inter',sans-serif;
+  font-size:8.2pt; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--gold-light); margin-top:5mm; }
+
+.cover-foot{ padding-top:9mm; border-top:1px solid rgba(230,189,99,.26); }
+.cover-meta{ display:flex; justify-content:space-between; gap:8mm; }
+.cover-meta div{ flex:1 }
+.cover-meta .k{
+  font-size:7.4pt; font-weight:600; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--gold-light); margin-bottom:2.2mm;
+}
+.cover-meta .v{ font-size:10pt; color:rgba(255,255,255,.90); font-weight:500; }
+.cover-meta .r{ text-align:right }
+
+/* ─────────── INTERIOR ─────────── */
+.doc{ padding-top:2mm; }
+
+h1{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-size:19pt; line-height:1.2; color:var(--navy);
+  margin:0 0 4mm; font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 90;
+}
+h2{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-size:14.6pt; line-height:1.25; color:var(--navy);
+  margin:9mm 0 3.4mm; padding-bottom:2.4mm;
+  border-bottom:1px solid var(--rule);
+  position:relative; break-after:avoid; page-break-after:avoid;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 80;
+}
+h2::after{ content:''; position:absolute; left:0; bottom:-1px; width:17mm; height:2px; background:var(--gold); }
+h3{
+  font-family:'Inter',sans-serif; font-weight:700;
+  font-size:10.6pt; letter-spacing:.02em; color:var(--navy);
+  margin:6.5mm 0 2.2mm; break-after:avoid; page-break-after:avoid;
+}
+h4{ font-family:'Inter',sans-serif; font-weight:600; font-size:9.8pt; color:var(--navy-soft); margin:5mm 0 1.6mm; }
+
+p{ margin:0 0 3.4mm; orphans:2; widows:2; }
+strong{ color:var(--ink); font-weight:600 }
+em{ font-style:italic }
+
+ul,ol{ margin:0 0 3.8mm; padding-left:5.5mm }
+li{ margin-bottom:1.7mm; padding-left:1mm }
+li::marker{ color:var(--gold) }
+ol li::marker{ font-weight:600; font-size:9.6pt }
+
+hr{ border:0; height:1px; background:var(--rule); margin:8mm 0; }
+
+/* pull quote / callout */
+blockquote{
+  margin:5mm 0; padding:4.2mm 6mm; background:var(--wash);
+  border-left:2.5px solid var(--gold); border-radius:0 4px 4px 0;
+  color:var(--ink); break-inside:avoid; page-break-inside:avoid;
+}
+blockquote p{ margin:0 0 2mm } blockquote p:last-child{ margin:0 }
+blockquote strong:first-child{ color:var(--navy) }
+
+/* scripture / epigraph — a blockquote that is purely italic prose */
+blockquote.verse{
+  background:transparent; border-left:0; border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule); text-align:center; padding:5mm 8mm;
+  font-family:'Fraunces',Georgia,serif; font-style:italic; font-size:11.4pt;
+  color:var(--navy-soft); border-radius:0;
+}
+
+table{ width:100%; border-collapse:collapse; margin:5mm 0; font-size:9.5pt; break-inside:avoid; }
+th{
+  background:var(--navy); color:#fff; text-align:left;
+  font-weight:600; font-size:8.2pt; letter-spacing:.10em; text-transform:uppercase;
+  padding:2.8mm 3.2mm;
+}
+td{ padding:2.6mm 3.2mm; border-bottom:1px solid var(--rule); vertical-align:top; }
+tr:nth-child(even) td{ background:var(--wash) }
+
+code{ font-family:'DejaVu Sans Mono',monospace; font-size:8.8pt; background:var(--wash); padding:.4mm 1.2mm; border-radius:2px; }
+
+/* Fenced code blocks. white-space:pre-wrap is load-bearing: without it every
+   newline collapses and a copy-pasteable script renders as one unrunnable line. */
+pre{
+  background:var(--wash); border:1px solid var(--rule); border-left:2.5px solid var(--gold);
+  border-radius:3px; padding:3.4mm 4mm; margin:4mm 0;
+  white-space:pre-wrap; word-break:break-word; overflow-wrap:anywhere;
+  break-inside:avoid; font-size:8.2pt; line-height:1.5;
+}
+pre code{ background:none; padding:0; font-size:8.2pt; display:block; }
+
+/* signature block */
+.sig{ margin-top:4mm; padding:5mm 6mm; border:1px solid var(--rule); border-top:2.5px solid var(--gold); background:var(--wash); break-inside:avoid; }
+.sig .row{ margin-bottom:5mm }
+.sig .lbl{ font-size:7.6pt; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:7mm; }
+.sig .line{ border-bottom:1px solid #9AA4B0; height:0 }
+.sig .split{ display:flex; gap:8mm } .sig .split > div{ flex:1 }
+.sig .split > div.date{ flex:0 0 42mm }
+
+/* keep headed sections together where possible */
+h2 + p, h3 + p{ break-before:avoid }

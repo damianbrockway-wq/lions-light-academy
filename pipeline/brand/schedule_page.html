@@ -1,0 +1,313 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces.ttf') format('truetype');font-weight:100 900;font-display:block}
+@font-face{font-family:'Inter';src:url('fonts/Inter.ttf') format('truetype');font-weight:100 900;font-display:block}
+  @page { size: Letter landscape; margin: 11mm 12mm; }
+
+  :root{
+    --navy:#0A1929; --navy-soft:#1B2C42;
+    --gold:#8A6210; --gold-line:#D9BE7C; --gold-bg:#F8F1DE;
+    --ink:#12202F; --body:#3A4654; --muted:#77828F;
+    --line:#DCE1E7;
+
+    --hs-bg:#E9EFF5;  --hs-line:#4A6B8A;  --hs-ink:#25405A;
+    --el-bg:#EDEFE1;  --el-line:#79814F;  --el-ink:#4B5231;
+    --ms-bg:#F7EDE4;  --ms-line:#A5734F;  --ms-ink:#6E482C;
+
+    --row:10.4px;
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Inter",system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  html,body{margin:0; padding:0}
+  body{
+    font-family:var(--sans); color:var(--ink);
+    font-size:10.5px; line-height:1.35; background:#fff;
+  }
+
+  /* ── masthead ───────────────────────────── */
+  .mast{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:20px; border-bottom:2.5px solid var(--navy); padding-bottom:7px;
+  }
+  .mast .left{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+  h1{
+    font-family:var(--serif); font-size:28px; font-weight:700;
+    letter-spacing:-.015em; margin:0; color:var(--navy); line-height:1;
+  }
+  .sched-word{
+    font-family:var(--serif); font-size:18px; font-style:italic;
+    color:var(--gold); line-height:1;
+  }
+  .mast .right{text-align:right; font-size:9px; color:var(--muted); line-height:1.5}
+  .mast .right b{color:var(--ink); font-weight:600}
+
+  /* ── legend ─────────────────────────────── */
+  .legend{
+    display:flex; gap:16px; flex-wrap:wrap; align-items:center;
+    margin:7px 0 9px; font-size:8px; color:var(--body);
+  }
+  .legend i{
+    width:9px; height:9px; border-radius:2px; display:inline-block;
+    margin-right:5px; vertical-align:-1px; border:1px solid;
+  }
+  .k-hs i{background:var(--hs-bg); border-color:var(--hs-line)}
+  .k-el i{background:var(--el-bg); border-color:var(--el-line)}
+  .k-ms i{background:var(--ms-bg); border-color:var(--ms-line)}
+  .k-ws i{background:var(--navy); border-color:var(--navy)}
+  .k-br i{background:#fff; border-color:var(--line); border-style:dashed}
+
+  /* ── whole-school bands ─────────────────── */
+  .band{
+    background:var(--navy); color:#F1F4F8; border-radius:2.5px;
+    padding:6px 13px; display:flex; align-items:baseline; gap:14px;
+  }
+  .band .t{
+    font-variant-numeric:tabular-nums; font-weight:700; font-size:10px;
+    color:var(--gold-line); min-width:74px; letter-spacing:.03em;
+  }
+  .band .n{font-family:var(--serif); font-size:15px; font-weight:600; letter-spacing:-.01em}
+  .band .d{font-size:9.5px; opacity:.72; margin-left:auto; text-align:right}
+
+  /* ── section rule ───────────────────────── */
+  .seg{
+    display:flex; align-items:center; gap:10px; margin:9px 0 5px;
+    font-size:7.5px; font-weight:700; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .seg::after{content:""; flex:1; height:1px; background:var(--line)}
+
+  /* ── morning grid ───────────────────────── */
+  .morning{display:grid; grid-template-columns:repeat(3,1fr); gap:9px}
+  .tw{display:flex; flex-direction:column; gap:5px; min-width:0}
+  .tw h3{
+    margin:0; padding-bottom:4px; display:flex;
+    justify-content:space-between; align-items:baseline; gap:8px;
+    font-family:var(--serif); font-size:13.5px; font-weight:600; letter-spacing:-.01em;
+    border-bottom:2px solid;
+  }
+  .tw h3 em{
+    font-family:var(--sans); font-style:normal;
+    font-size:7.5px; font-weight:600; letter-spacing:.07em; color:var(--muted);
+  }
+  .hs h3{border-color:var(--hs-line); color:var(--hs-ink)}
+  .el h3{border-color:var(--el-line); color:var(--el-ink)}
+  .ms h3{border-color:var(--ms-line); color:var(--ms-ink)}
+
+  .track{display:grid; grid-template-rows:repeat(34,var(--row))}
+
+  .blk{
+    border-radius:2.5px; padding:5px 9px; overflow:hidden; min-width:0;
+    display:flex; flex-direction:column; justify-content:center; gap:1px;
+    border:1px solid; border-left-width:3px; position:relative;
+  }
+  .hs .blk{background:var(--hs-bg); border-color:var(--hs-line)}
+  .el .blk{background:var(--el-bg); border-color:var(--el-line)}
+  .ms .blk{background:var(--ms-bg); border-color:var(--ms-line)}
+
+  .blk .t{
+    font-variant-numeric:tabular-nums; font-size:8.8px; font-weight:700;
+    letter-spacing:.03em; color:var(--muted);
+  }
+  .blk .subj{
+    font-family:var(--serif); font-size:14px; font-weight:600;
+    line-height:1.1; letter-spacing:-.01em; color:var(--ink);
+  }
+  .blk .who{font-size:9.5px; color:var(--body); line-height:1.25}
+  .blk .who b{font-weight:600; color:var(--ink)}
+  .mins{
+    position:absolute; right:9px; bottom:5px;
+    font-variant-numeric:tabular-nums; font-size:7.5px; font-weight:700;
+    letter-spacing:.04em; color:var(--muted); opacity:.85;
+  }
+
+  .room{
+    position:absolute; left:9px; bottom:5px;
+    font-size:7px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--body); background:#fff; border:1px solid var(--line);
+    border-radius:2px; padding:1px 5px;
+  }
+  .brk{
+    border:1px dashed var(--line); border-radius:2.5px;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size:7.5px; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--muted); overflow:hidden; text-align:center;
+  }
+  .brk span{
+    font-variant-numeric:tabular-nums; letter-spacing:.02em;
+    text-transform:none; font-weight:500;
+  }
+
+  /* ── afternoon ──────────────────────────── */
+  .aft{display:grid; grid-template-columns:repeat(3,1fr); gap:9px}
+  .aft .hsblk{grid-column:1}
+  .aft .combined{grid-column:2 / span 2}
+  .aft .blk{min-height:58px; padding:8px 11px 21px; border-left-width:3px}
+  .aft .blk .subj{font-size:15.5px}
+  .aft .combined{
+    background:#F0F1E9; border-color:var(--el-line);
+    border-left:3px solid var(--ms-line); border-right:3px solid var(--el-line);
+  }
+  .aft .combined .badge{
+    display:inline-block; font-size:7px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:#fff; background:var(--navy-soft);
+    border-radius:2px; padding:1.5px 5px; margin-left:6px; vertical-align:2px;
+  }
+  .aft .hsblk{background:var(--hs-bg); border-color:var(--hs-line)}
+
+  footer{
+    margin-top:8px; padding-top:6px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:16px;
+    font-size:7.5px; color:var(--muted);
+  }
+</style></head>
+<body>
+
+<header class="mast">
+  <div class="left">
+    <h1>Lions Light Academy</h1>
+    <span class="sched-word">Daily Schedule</span>
+  </div>
+  <div class="right">
+    <b>Every Tuesday &middot; Sept 15, 2026 &ndash; May 11, 2027</b><br>
+    Class names match Google Classroom &middot; unit shown beneath &middot; cleanup 1:30 sharp
+  </div>
+</header>
+
+<div class="legend">
+  <span class="k-hs"><i></i>High School</span>
+  <span class="k-ms"><i></i>Middle School</span>
+  <span class="k-el"><i></i>Elementary</span>
+  <span class="k-ws"><i></i>Whole school</span>
+  <span class="k-br"><i></i>Break / snack</span>
+</div>
+
+<div class="band">
+  <span class="t">8:45 – 9:00</span>
+  <span class="n">Arrival + Worship</span>
+  <span class="d">Worship &middot; Scripture &middot; prayer &mdash; everyone together. Teachers arrive 8:30.</span>
+</div>
+
+<p class="seg">Morning</p>
+
+<div class="morning">
+
+  <div class="tw hs">
+    <h3>High School <em>TWO 80-MIN + 60</em></h3>
+    <div class="track">
+      <div class="blk" style="grid-row:1/17">
+        <div class="t">9:00 – 10:20</div>
+        <div class="subj">HS Chemistry</div>
+        <div class="who"><b>Ginny</b> &middot; core chemistry &middot; helper optional</div>
+        <div class="room">Gray Room</div>
+        <div class="mins">80 MIN</div>
+      </div>
+      <div class="brk" style="grid-row:17/19">Break + snack <span>10:20</span></div>
+      <div class="blk" style="grid-row:19/35">
+        <div class="t">10:30 – 11:50</div>
+        <div class="subj">HS Computer Science</div>
+        <div class="who"><b>Damian</b> &middot; AI literacy &middot; coding &middot; web design &middot; photography</div>
+        <div class="room">Gray Room</div>
+        <div class="mins">80 MIN</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw ms">
+    <h3>Middle School <em>45 + TWO 1-HR</em></h3>
+    <div class="track">
+      <div class="blk" style="grid-row:1/13">
+        <div class="t">9:00 – 10:00</div>
+        <div class="subj">MS Art</div>
+        <div class="who"><b>Erika</b> &middot; all things art &middot; full hour</div>
+        <div class="room">Main Room</div>
+        <div class="mins">60 MIN</div>
+      </div>
+      <div class="brk" style="grid-row:13/16">Snack <span>10:00</span></div>
+      <div class="blk" style="grid-row:16/25">
+        <div class="t">10:15 – 11:00</div>
+        <div class="subj">MS History</div>
+        <div class="who"><b>Leah</b> &middot; history core</div>
+        <div class="room">Yellow Room</div>
+        <div class="mins">45 MIN</div>
+      </div>
+      <div class="blk" style="grid-row:26/35">
+        <div class="t">11:05 – 11:50</div>
+        <div class="subj">MS Science</div>
+        <div class="who"><b>Ginny</b> &middot; applied engineering</div>
+        <div class="room">Yellow Room</div>
+        <div class="mins">45 MIN</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw el">
+    <h3>Elementary <em>45-MIN BLOCKS</em></h3>
+    <div class="track">
+      <div class="blk" style="grid-row:1/10">
+        <div class="t">9:00 – 9:45</div>
+        <div class="subj">E History</div>
+        <div class="who"><b>Leah</b> &middot; history core</div>
+        <div class="room">Yellow Room</div>
+        <div class="mins">45 MIN</div>
+      </div>
+      <div class="brk" style="grid-row:10/13">Recess <span>9:45</span></div>
+      <div class="brk" style="grid-row:13/16">Snack <span>10:00</span></div>
+      <div class="blk" style="grid-row:16/25">
+        <div class="t">10:15 – 11:00</div>
+        <div class="subj">E Art</div>
+        <div class="who"><b>Erika</b> &middot; all things art</div>
+        <div class="room">Main Room</div>
+        <div class="mins">45 MIN</div>
+      </div>
+      <div class="blk" style="grid-row:26/35">
+        <div class="t">11:05 – 11:50</div>
+        <div class="subj">E Science</div>
+        <div class="who"><b>Jess</b> &middot; zoology &amp; marine biology</div>
+        <div class="room">Main Room</div>
+        <div class="mins">45 MIN</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="band" style="margin-top:9px">
+  <span class="t">11:50 – 12:30</span>
+  <span class="n">Lunch &mdash; whole school together</span>
+  <span class="d">The shared meal is back: community + formation</span>
+</div>
+
+<p class="seg">Afternoon &middot; last class</p>
+
+<div class="aft">
+  <div class="blk hsblk">
+    <div class="t">12:30 – 1:30 &middot; High School</div>
+    <div class="subj">HS Real World Ready</div>
+    <div class="who"><b>Damian</b> &middot; discernment, stewardship, adulting</div>
+    <div class="room">Gray Room</div>
+    <div class="mins">60 MIN</div>
+  </div>
+  <div class="blk combined">
+    <div class="t">12:30 – 1:30 &middot; Middle School + Elementary</div>
+    <div class="subj">Drama and Public Speaking <span class="badge">Combined</span></div>
+    <div class="who"><b>Savannah</b> + 1&ndash;2 helpers &middot; storytelling &middot; the last class</div>
+    <div class="room">Main Room</div>
+    <div class="mins">60 MIN</div>
+  </div>
+</div>
+
+<div class="band" style="margin-top:9px">
+  <span class="t">1:30 – 1:45</span>
+  <span class="n">Cleanup + Examen</span>
+  <span class="d">&ldquo;Where did I notice God today?&rdquo; &middot; cleanup starts 1:30 sharp &middot; dismiss 1:45</span>
+</div>
+
+<footer>
+  <span>Lions Light Academy &middot; Tuesday co-op day &middot; 2026&ndash;2027 &middot; first day Sept 15 &middot; last day May 11</span>
+  <span>Teachers 8:30 &middot; Students 8:45 &middot; Dismissal 1:45</span>
+</footer>
+
+</body></html>

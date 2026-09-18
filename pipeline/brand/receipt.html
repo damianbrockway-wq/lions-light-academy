@@ -1,0 +1,131 @@
+<style>
+@page{ size:Letter; margin:14mm 15mm; }
+@page:first{ margin:14mm 15mm; }
+body{ margin:0; font-family:'Inter',sans-serif; color:#39434F; }
+
+.rcpt{
+  border:1px solid #C3CAD3; border-top:3px solid #C08A2E; border-radius:4px;
+  padding:0; margin-bottom:7mm; break-inside:avoid; overflow:hidden;
+}
+.rcpt:last-of-type{ margin-bottom:0 }
+
+.r-head{
+  background:#070F1C; color:#fff; display:flex; align-items:center; gap:5mm;
+  padding:4.5mm 6mm; position:relative; overflow:hidden;
+}
+.r-head::before{ content:''; position:absolute; inset:0;
+  background:radial-gradient(80% 150% at 10% 50%, rgba(230,189,99,.20), transparent 62%); }
+.r-head > *{ position:relative }
+.r-mark{ width:14mm; height:auto; flex:0 0 auto }
+.r-id{ flex:1 }
+.r-org{ font-size:6.6pt; font-weight:600; letter-spacing:.24em;
+  text-transform:uppercase; color:#E6BD63; margin-bottom:1.4mm }
+.r-title{ font-family:'Fraunces',Georgia,serif; font-size:15pt; font-weight:600;
+  margin:0; line-height:1.05; font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 100 }
+.r-year{ font-family:'Fraunces',Georgia,serif; font-style:italic;
+  font-size:9pt; color:rgba(255,255,255,.70); margin-top:1.2mm }
+.r-copy{ flex:0 0 auto; text-align:right }
+.r-copy .lab{ font-size:6.6pt; font-weight:700; letter-spacing:.18em;
+  text-transform:uppercase; color:#E6BD63; margin-bottom:2mm }
+.r-copy .num{ font-size:8pt; color:rgba(255,255,255,.85) }
+.r-copy .numline{ display:inline-block; width:22mm; border-bottom:1px solid rgba(255,255,255,.45); }
+
+.r-body{ padding:5.5mm 6mm 4mm }
+.rf{ display:flex; flex-wrap:wrap; gap:0 6mm }
+.rf .c{ flex:1 1 100%; margin-bottom:5.5mm }
+.rf .c.half{ flex:1 1 calc(50% - 3mm) }
+.rf .c.third{ flex:1 1 calc(33.333% - 4mm) }
+.rf .c.two-thirds{ flex:1 1 calc(66.666% - 2mm) }
+.rf label{ display:block; font-size:6.8pt; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:#6B7684; margin-bottom:6mm }
+.rf .ln{ border-bottom:1px solid #A6AEB9; height:0 }
+
+.amt{ display:flex; align-items:flex-end; gap:3mm }
+.amt .dollar{ font-family:'Fraunces',Georgia,serif; font-size:16pt; font-weight:600;
+  color:#0B1626; line-height:1; padding-bottom:.5mm }
+.amt .ln{ flex:1 }
+
+.pay{ display:flex; gap:7mm; align-items:center; margin-bottom:5mm }
+.pay .o{ display:flex; align-items:center; gap:2.5mm; font-size:8.8pt }
+.pay .cb{ width:3.4mm; height:3.4mm; border:1.1px solid #1B2C42; border-radius:1px; background:#fff }
+.pay .chknum{ display:inline-block; width:26mm; border-bottom:1px solid #A6AEB9 }
+
+.notice{ background:#F8F6F2; border-left:2.5px solid #C08A2E; padding:3.2mm 4.5mm;
+  font-size:7.8pt; line-height:1.5; border-radius:0 3px 3px 0; }
+.notice strong{ color:#0B1626 }
+
+.cut{ text-align:center; font-size:6.6pt; letter-spacing:.2em; text-transform:uppercase;
+  color:#A6AEB9; margin:0 0 7mm; }
+.cut span{ display:inline-block; padding:0 3mm; background:#fff; position:relative; top:-.9mm }
+.cutline{ border-top:1px dashed #C3CAD3; margin-top:-2.4mm }
+</style>
+
+<div class="rcpt">
+  <div class="r-head">
+    <img class="r-mark" src="data:image/png;base64,{logo}" alt="">
+    <div class="r-id">
+      <div class="r-org">Lions Light Academy</div>
+      <h1 class="r-title">Supply Fee Receipt</h1>
+      <div class="r-year">2026&ndash;2027 School Year</div>
+    </div>
+    <div class="r-copy">
+      <div class="lab">Family Copy</div>
+      <div class="num">No. <span class="numline"></span></div>
+    </div>
+  </div>
+  <div class="r-body">
+    <div class="rf">
+      <div class="c two-thirds"><label>Received From &mdash; Family Name</label><div class="ln"></div></div>
+      <div class="c third"><label>Date Received</label><div class="ln"></div></div>
+      <div class="c two-thirds"><label>Student(s)</label><div class="ln"></div></div>
+      <div class="c third"><label>Amount</label><div class="amt"><span class="dollar">$</span><span class="ln"></span></div></div>
+    </div>
+    <div class="pay">
+      <div class="o"><span class="cb"></span><span>Check no. <span class="chknum"></span></span></div>
+      <div class="o"><span class="cb"></span><span>Cash</span></div>
+    </div>
+    <div class="rf">
+      <div class="c half" style="margin-bottom:4.5mm"><label>Received By</label><div class="ln"></div></div>
+      <div class="c half" style="margin-bottom:4.5mm"><label>For</label><div class="ln"></div></div>
+    </div>
+    <div class="notice">
+      <strong>This is a participation fee, not a charitable contribution.</strong> It is not tax-deductible and should not be claimed as one. Funds are used for classroom supplies and equipment or returned to the host church. Nothing is kept as profit and no one is paid from these funds.
+    </div>
+  </div>
+</div>
+
+<p class="cut"><span>cut here</span></p><div class="cutline"></div>
+
+<div class="rcpt">
+  <div class="r-head">
+    <img class="r-mark" src="data:image/png;base64,{logo}" alt="">
+    <div class="r-id">
+      <div class="r-org">Lions Light Academy</div>
+      <h1 class="r-title">Supply Fee Receipt</h1>
+      <div class="r-year">2026&ndash;2027 School Year</div>
+    </div>
+    <div class="r-copy">
+      <div class="lab">Co-op Record</div>
+      <div class="num">No. <span class="numline"></span></div>
+    </div>
+  </div>
+  <div class="r-body">
+    <div class="rf">
+      <div class="c two-thirds"><label>Received From &mdash; Family Name</label><div class="ln"></div></div>
+      <div class="c third"><label>Date Received</label><div class="ln"></div></div>
+      <div class="c two-thirds"><label>Student(s)</label><div class="ln"></div></div>
+      <div class="c third"><label>Amount</label><div class="amt"><span class="dollar">$</span><span class="ln"></span></div></div>
+    </div>
+    <div class="pay">
+      <div class="o"><span class="cb"></span><span>Check no. <span class="chknum"></span></span></div>
+      <div class="o"><span class="cb"></span><span>Cash</span></div>
+    </div>
+    <div class="rf">
+      <div class="c half" style="margin-bottom:4.5mm"><label>Received By</label><div class="ln"></div></div>
+      <div class="c half" style="margin-bottom:4.5mm"><label>Deposited / Spent On</label><div class="ln"></div></div>
+    </div>
+    <div class="notice">
+      <strong>Keep this half.</strong> Log it against the supply ledger &mdash; money in should match supplies out. Receipts for anything purchased with these funds are filed with this record.
+    </div>
+  </div>
+</div>

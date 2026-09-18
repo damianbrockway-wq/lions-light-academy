@@ -32,3 +32,17 @@
 
 /kit/*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+# ── Document sources and build pipeline ─────────────────────────────────────
+# These are in the repo so the documents can always be rebuilt and so git keeps
+# their history. They are published like everything else here — the content is
+# already public as PDFs — but there is no reason for them to be indexed.
+#
+# teacher_id.html is deliberately NOT in this repo: it embeds photographs of
+# real teachers. It lives only in the local build kit tarball.
+
+/sources/*
+  X-Robots-Tag: noindex, nofollow
+
+/pipeline/*
+  X-Robots-Tag: noindex, nofollow

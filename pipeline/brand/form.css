@@ -1,0 +1,135 @@
+/* Registration & Enrollment form — extends brand.css */
+
+.formdoc{ font-size:9.8pt; }
+
+.sect{ margin:0 0 5.5mm; }
+.sect-head{
+  break-after:avoid; page-break-after:avoid;
+  display:flex; align-items:baseline; gap:3mm;
+  border-bottom:1px solid var(--rule); padding-bottom:2mm; margin-bottom:4mm;
+  position:relative;
+}
+.sect-head::after{ content:''; position:absolute; left:0; bottom:-1px; width:17mm; height:2px; background:var(--gold); }
+.sect-num{
+  font-family:'Fraunces',Georgia,serif; font-size:15pt; font-weight:600;
+  color:var(--gold); line-height:1; min-width:8mm;
+}
+.sect-title{
+  font-family:'Fraunces',Georgia,serif; font-size:13.4pt; font-weight:600;
+  color:var(--navy); margin:0; line-height:1.15;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 80;
+}
+.sect-note{ font-size:8.6pt; color:var(--muted); margin:0 0 3.5mm; line-height:1.5; }
+
+/* field grid */
+.fields{ display:flex; flex-wrap:wrap; gap:0 6mm; }
+.f{ flex:1 1 100%; margin-bottom:5.2mm; min-width:0; }
+.f.half{ flex:1 1 calc(50% - 3mm) } .f.third{ flex:1 1 calc(33.333% - 4mm) }
+.f.two-thirds{ flex:1 1 calc(66.666% - 2mm) } .f.quarter{ flex:1 1 calc(25% - 4.5mm) }
+.f label{
+  display:block; font-size:7.2pt; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:7mm;
+}
+.f .rule{ border-bottom:1px solid #A6AEB9; height:0 }
+.f .box{ border:1px solid #C3CAD3; border-radius:3px; height:13mm; background:#FCFCFD }
+.f .box.tall{ height:19mm }
+
+/* repeating student rows */
+.srow{ border:1px solid var(--rule); border-left:2.5px solid var(--gold);
+  border-radius:0 4px 4px 0; padding:3.4mm 5mm 1.4mm; margin-bottom:3.4mm; background:#FCFBF9;
+  break-inside:avoid; }
+.srow .tag{ font-size:7.2pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:3mm; }
+
+/* checkboxes */
+.opts{ margin:0 0 3mm }
+.opt{ display:flex; align-items:flex-start; gap:3mm; margin-bottom:2.6mm; font-size:9.4pt; }
+.cb{ flex:0 0 auto; width:3.6mm; height:3.6mm; border:1.2px solid var(--navy-soft);
+  border-radius:1px; margin-top:.9mm; background:#fff }
+.opt > span:not(.cb){ flex:1 }
+.opt > .cb{ flex:0 0 3.6mm }
+
+/* consent blocks */
+.consent{ background:var(--wash); border-left:2.5px solid var(--gold);
+  padding:4mm 5.5mm; margin:0 0 4mm; font-size:9.2pt; line-height:1.58;
+  break-inside:avoid; border-radius:0 4px 4px 0; }
+.consent h4{ margin:0 0 2mm; font-size:9.6pt; color:var(--navy); font-weight:700; }
+.consent p{ margin:0 0 2.4mm } .consent p:last-child{ margin:0 }
+
+.initial{ display:flex; align-items:flex-end; gap:3mm; margin-top:3.5mm; }
+.initial .lbl{ font-size:7.4pt; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted); white-space:nowrap }
+.initial .rule{ flex:0 0 30mm; border-bottom:1px solid #A6AEB9; height:0 }
+
+/* acknowledgment checklist */
+.ack{ border:1px solid var(--rule); border-top:2.5px solid var(--gold);
+  padding:5mm 6mm; margin-bottom:5mm; background:#fff; break-inside:avoid; }
+.ack .opt{ font-size:9.3pt; margin-bottom:3.2mm }
+.ack .ver{ color:var(--muted); font-size:8.4pt }
+
+/* final signature panel */
+.signpanel{ border:1px solid var(--rule); border-top:2.5px solid var(--gold);
+  background:var(--wash); padding:5mm 6mm; break-inside:avoid; }
+.signpanel .f{ margin-bottom:6mm }
+
+.office{ margin-top:6mm; border:1px dashed #C3CAD3; padding:4mm 5mm; background:#FBFBFC; }
+.office .tag{ font-size:7.2pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:3mm }
+
+.flag{ font-size:8.4pt; color:var(--muted); font-style:italic; margin-top:2mm }
+
+/* fee tiers */
+.fee{ border:1px solid var(--rule); border-radius:4px; overflow:hidden; break-inside:avoid; }
+.fee-row{ display:flex; align-items:center; gap:5mm; padding:3.6mm 5mm; }
+.fee-row + .fee-row{ border-top:1px solid var(--rule); background:var(--wash); }
+.fee-amt{
+  flex:0 0 26mm; text-align:center;
+  font-family:'Fraunces',Georgia,serif; font-size:19pt; font-weight:600;
+  color:var(--navy); line-height:1;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 90;
+}
+.fee-amt.free{ font-size:13pt; color:var(--gold) }
+.fee-txt{ flex:1; font-size:9.2pt; line-height:1.5 }
+.fee-txt strong{ color:var(--navy) }
+
+.keep{ break-inside:avoid; page-break-inside:avoid; }
+
+/* ── compact header band (replaces full cover on the form) ── */
+.bandhead{
+  background:var(--navy-deep); color:#fff; position:relative; overflow:hidden;
+  display:flex; align-items:center; gap:7mm;
+  padding:7mm 8mm; margin:0 0 7mm; border-radius:4px;
+}
+.bandhead::before{ content:''; position:absolute; inset:0;
+  background:radial-gradient(90% 160% at 12% 50%, rgba(230,189,99,.20), transparent 60%); }
+.bandhead > *{ position:relative }
+.band-mark{ width:21mm; height:auto; flex:0 0 auto }
+.band-txt{ flex:1 }
+.band-eyebrow{ font-size:7.4pt; font-weight:600; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--gold-light); margin-bottom:2mm }
+.band-title{ font-family:'Fraunces',Georgia,serif; font-size:22pt; font-weight:600;
+  color:#fff; margin:0 0 1.5mm; line-height:1.05;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 110 }
+.band-sub{ font-family:'Fraunces',Georgia,serif; font-style:italic;
+  font-size:10.4pt; color:rgba(255,255,255,.72) }
+.band-meta{ flex:0 0 auto; text-align:right; border-left:1px solid rgba(230,189,99,.30); padding-left:6mm }
+.band-meta .k{ font-size:6.8pt; font-weight:600; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--gold-light); margin-bottom:1.6mm }
+.band-meta .v{ font-size:9pt; color:rgba(255,255,255,.90); font-weight:500 }
+
+.lede{ font-size:9.4pt; color:var(--body); margin:0 0 5mm }
+.f .box.xtall{ height:26mm }
+
+/* student grid */
+table.grid{ width:100%; border-collapse:collapse; margin:1mm 0 0; }
+table.grid th{
+  background:var(--navy); color:#fff; text-align:left;
+  font-size:7.4pt; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+  padding:2.4mm 3mm;
+}
+table.grid td{ border:1px solid #C3CAD3; border-top:0; height:11mm; background:#FCFCFD }
+table.grid .w-dob{ width:34mm } table.grid .w-gr{ width:26mm }
+
+/* the form has no full-bleed cover page, so page 1 keeps normal margins
+   (overrides the @page:first rule brand.css uses for document covers) */
+@page:first{ margin:19mm 17mm 20mm 17mm; }
